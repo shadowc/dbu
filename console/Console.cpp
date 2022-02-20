@@ -15,6 +15,10 @@ namespace Console {
 	{
 		colorSchemeManager = new ColorSchemeManager();
 		cacheConsoleSize = Size();
+
+		// Start with cursorVisible=false and ensure we have a cursor
+		cursorVisible = false;
+		showCursor();
 	}
 
 	ConsoleTty* ConsoleTty::getTty()
@@ -54,6 +58,27 @@ namespace Console {
 	void ConsoleTty::resetColor()
 	{
 		cout << "\033[0m";
+	}
+
+	void ConsoleTty::hideCursor()
+	{
+		if (cursorVisible) {
+			cout << "\033[?25l";
+			cursorVisible = false;
+		}
+	}
+
+	void ConsoleTty::showCursor()
+	{
+		if (!cursorVisible) {
+			cout << "\033[?25h";
+			cursorVisible = true;
+		}
+	}
+
+	bool ConsoleTty::isCursorVisible()
+	{
+		return cursorVisible;
 	}
 
 	void ConsoleTty::clearScreen()

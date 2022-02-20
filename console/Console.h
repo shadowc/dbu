@@ -22,6 +22,10 @@ namespace Console {
 
 		void resetColor();
 
+		void hideCursor();
+		void showCursor();
+		bool isCursorVisible();
+
 		void clearScreen();
 		void clearScreen(ColorStyle colorStyle);
 		void setPos(int col, int row);
@@ -30,5 +34,6 @@ namespace Console {
 	private:
 		static ConsoleTty* instance;
 		Size cacheConsoleSize;
+		bool cursorVisible;
 	};
 }

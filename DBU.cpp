@@ -26,8 +26,11 @@ int main()
 	console->setColor(scheme.Paragraph);
 	cout << "Console size: " << cSize.Width << ", " << cSize.Height;
 
-	getchar();
+	console->hideCursor();
 
+	cin.get();
+
+	console->showCursor();
 	console->resetColor();
 	console->clearScreen();
 	return 0;
