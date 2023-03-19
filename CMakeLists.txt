@@ -25,6 +25,7 @@ configure_file(platform.h.in platform.h)
 set(
     PROJECT_SRC
     "DBU.cpp" 
+    "event/EventQueue.cpp"
     "console/Console.cpp"  
     "console/Color.cpp"  
     "console/ForegroundColors.cpp" 

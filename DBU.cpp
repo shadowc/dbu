@@ -2,6 +2,8 @@
 //
 
 #include "DBU.h"
+#include "event/EventQueue.h"
+#include "event/EventDef.h"
 #include "console/Console.h"
 #include "console/ConsoleTools.h"
 #include "console/Color.h"
@@ -26,6 +28,7 @@ bool charChanged;
 int main()
 {
 	ConsoleTty* console = ConsoleTty::getTty();
+	EventQueue* eventQueue = EventQueue::GetInstance();
 	cacheSize = console->getConsoleSize();
 	lastChar = 0;
 
@@ -37,13 +40,21 @@ int main()
 	while (!exiting) {
 		Paint(console, false);
 
-		while (_kbhit()) {
-			lastChar = _getch();
-			charChanged = true;
-		}
+		eventQueue->Loop();
 
-		if (lastChar == 27) {
-			exiting = true;
+		while (eventQueue->UnprocessedEvents()) {
+			Event event = eventQueue->GetNextUnprocessedEvent();
+
+			switch (event.Type) {
+				case (EventType::Keyboard):
+					lastChar = event.KeyCode;
+					charChanged = true;
+					if (lastChar == 27) {
+						exiting = true;
+					}
+					
+					break;
+			}
 		}
 
 		this_thread::sleep_for(chrono::milliseconds(16));
@@ -52,6 +63,8 @@ int main()
 	console->showCursor();
 	console->resetColor();
 	console->clearScreen();
+	eventQueue->Shutdown();
+
 	return 0;
 }
 
