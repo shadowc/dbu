@@ -8,6 +8,15 @@
 using namespace Console;
 using namespace std;
 
+Screen::Screen() 
+    : AbstractWidget() 
+{
+    coords.X = 1;
+    coords.Y = 1;
+
+    OnResize();
+}
+
 void Screen::OnResize()
 {
     Size screenSize = EventQueue::GetInstance()->GetScreenSize();
@@ -18,26 +27,25 @@ void Screen::OnResize()
     Invalidate();
 }
 
-void Screen::Initialize() 
-{
-    coords.X = 1;
-    coords.Y = 1;
-
-    OnResize();
-}
-
 void Screen::RenderWidget()
 {
     ConsoleTty* console = ConsoleTty::getTty();
     ColorScheme scheme = console->getColorScheme();
 
     string titleStr = " DBU - No connection ";
-    console->setPos(floor((float)size.Width / 2.0f) - floor((float)titleStr.length() / 2), coords.Y);
-    console->setColor(scheme.Heading);
 
-    cout << titleStr;
+    // Draw title bar
+    console->setColor(scheme.TitleBar);
+    console->FillLine(1, coords.X, size.Width, ' ');
+    console->CenterString(1, coords.X, size.Width, titleStr);
     
-    console->setPos(1, size.Height);
+    // Draw status bar
+    console->FillLine(size.Height, coords.X, size.Width, ' ');
+    console->setPos(2, size.Height);
+    cout << "Console size: " << size.Width << "x" << size.Height << " \u00B3 Last key Pressed: \u00B3";
+
     console->setColor(scheme.Paragraph);
-    cout << "Console size: " << size.Width << ", " << size.Height;
+    for (int y = 2; y < size.Height - 1; y++) {
+        console->FillLine(y, coords.X, size.Width, ' ');
+    }
 }

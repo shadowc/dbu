@@ -81,6 +81,22 @@ namespace Console {
         return cursorVisible;
     }
 
+    void ConsoleTty::FillLine(int y, int from, int to, char c)
+    {
+        setPos(1, y);
+        for (int i = from; i <= to; i++) {
+            cout << c;
+        }
+    }
+
+    void ConsoleTty::CenterString(int y, int from, int to, string str)
+    {
+        int width = to - from;
+    
+        setPos(from + (int)(floor((float)width / 2.0f) - floor((float)str.length() / 2)), y);
+        cout << str;
+    }
+
     void ConsoleTty::clearScreen()
     {
         cout << "\033c";

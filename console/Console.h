@@ -26,6 +26,9 @@ namespace Console {
         void showCursor();
         bool isCursorVisible();
 
+        void FillLine(int y, int from, int to, char c);
+        void CenterString(int y, int from, int to, string str);
+
         void clearScreen();
         void clearScreen(ColorStyle colorStyle);
         void setPos(int col, int row);

@@ -27,7 +27,6 @@ protected:
     Size size;
     vector<AbstractWidget*> Children;
 
-    virtual void Initialize();
     virtual void RenderWidget();
     virtual void TearDown();
 };

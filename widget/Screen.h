@@ -4,9 +4,9 @@
 class Screen : public AbstractWidget
 {
 public:
+    Screen();
     virtual void OnResize();
 
 protected:
-    void Initialize() override;
     void RenderWidget() override;    
 };

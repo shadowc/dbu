@@ -70,6 +70,8 @@ int main()
             }
         }
 
+        screen->Draw();
+        
         // Loop at 60 fps (probably overkill)
         this_thread::sleep_for(chrono::milliseconds(16));
     }

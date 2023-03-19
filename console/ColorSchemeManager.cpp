@@ -12,6 +12,7 @@ namespace Console {
             ColorStyle(ForegroundColors::WHITE, BackgroundColors::BLUE), // paragraph
             ColorStyle(ForegroundColors::YELLOW, BackgroundColors::BLUE), // Highlight
             ColorStyle(ForegroundColors::CYAN, BackgroundColors::BLUE), // Heading
+            ColorStyle(ForegroundColors::BLACK, BackgroundColors::WHITE), // Title bar
             ColorStyle(ForegroundColors::BRIGHT_WHITE, BackgroundColors::CYAN), // Button Primary
             ColorStyle(ForegroundColors::BRIGHT_WHITE, BackgroundColors::GREY), // Button Secondary
             ColorStyle(ForegroundColors::BRIGHT_WHITE, BackgroundColors::RED) // Button Danger

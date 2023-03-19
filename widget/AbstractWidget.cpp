@@ -9,8 +9,6 @@ AbstractWidget::AbstractWidget() {
     coords = Coords(1, 1);
     invalidated = true;
     Children = vector<AbstractWidget*>();
-
-    Initialize();
 }
 
 AbstractWidget::~AbstractWidget() {
@@ -70,8 +68,6 @@ void AbstractWidget::Invalidate() {
 }
 
 void AbstractWidget::OnResize() {}
-
-void AbstractWidget::Initialize() {}
 
 void AbstractWidget::RenderWidget() {}
 
