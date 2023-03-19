@@ -7,16 +7,16 @@
 using namespace std;
 
 namespace Console {
-	class ColorSchemeManager {
-	public:
-		ColorSchemeManager();
+    class ColorSchemeManager {
+    public:
+        ColorSchemeManager();
 
-		void addColorScheme(string name, ColorScheme colorScheme);
-		void setColorScheme(string name);
-		ColorScheme getColorScheme();
+        void addColorScheme(string name, ColorScheme colorScheme);
+        void setColorScheme(string name);
+        ColorScheme getColorScheme();
 
-	private:
-		ColorScheme SelectedScheme;
-		map<string, ColorScheme> ColorSchemes;
-	};
+    private:
+        ColorScheme SelectedScheme;
+        map<string, ColorScheme> ColorSchemes;
+    };
 }

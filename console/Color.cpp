@@ -4,25 +4,25 @@
 using namespace std;
 
 namespace Console {
-	Color::Color()
-	{
-		value = 0;
-		representation = "0";
-	}
-	
-	Color::Color(unsigned char v, string rep)
-	{
-		value = v;
-		representation = rep;
-	}
+    Color::Color()
+    {
+        value = 0;
+        representation = "0";
+    }
 
-	unsigned char Color::getColorValue()
-	{
-		return value;
-	}
+    Color::Color(unsigned char v, string rep)
+    {
+        value = v;
+        representation = rep;
+    }
 
-	string Color::getColorString()
-	{
-		return representation;
-	}
+    unsigned char Color::getColorValue()
+    {
+        return value;
+    }
+
+    string Color::getColorString()
+    {
+        return representation;
+    }
 }

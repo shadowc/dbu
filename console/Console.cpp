@@ -9,96 +9,96 @@
 using namespace std;
 
 namespace Console {
-	ConsoleTty* ConsoleTty::instance = nullptr;
+    ConsoleTty* ConsoleTty::instance = nullptr;
 
-	ConsoleTty::ConsoleTty()
-	{
-		colorSchemeManager = new ColorSchemeManager();
+    ConsoleTty::ConsoleTty()
+    {
+        colorSchemeManager = new ColorSchemeManager();
 
-		_initConsoleInputMode();
-		// Start with cursorVisible=false and ensure we have a cursor
-		cursorVisible = false;
-		showCursor();
-	}
+        _initConsoleInputMode();
+        // Start with cursorVisible=false and ensure we have a cursor
+        cursorVisible = false;
+        showCursor();
+    }
 
-	ConsoleTty* ConsoleTty::getTty()
-	{
-		if (ConsoleTty::instance == nullptr) {
-			ConsoleTty::instance = new ConsoleTty();
-		}
+    ConsoleTty* ConsoleTty::getTty()
+    {
+        if (ConsoleTty::instance == nullptr) {
+            ConsoleTty::instance = new ConsoleTty();
+        }
 
-		return ConsoleTty::instance;
-	}
+        return ConsoleTty::instance;
+    }
 
-	ColorScheme ConsoleTty::getColorScheme()
-	{
-		return colorSchemeManager->getColorScheme();
-	}
+    ColorScheme ConsoleTty::getColorScheme()
+    {
+        return colorSchemeManager->getColorScheme();
+    }
 
-	void ConsoleTty::setColor(Color fg_color) 
-	{
-		cout << "\033[" << fg_color.getColorString() << "m";
-	}
+    void ConsoleTty::setColor(Color fg_color) 
+    {
+        cout << "\033[" << fg_color.getColorString() << "m";
+    }
 
-	void ConsoleTty::setColor(Color fg_color, Color bg_color)
-	{
-		cout << "\033[1;" << bg_color.getColorString() << ";" << fg_color.getColorString() << "m";
-	}
+    void ConsoleTty::setColor(Color fg_color, Color bg_color)
+    {
+        cout << "\033[1;" << bg_color.getColorString() << ";" << fg_color.getColorString() << "m";
+    }
 
-	void ConsoleTty::setColor(Color fg_color, Color bg_color, Color attribute)
-	{
-		cout << "\033[" << attribute.getColorString() << ";" << bg_color.getColorString() << ";" << fg_color.getColorString() << "m";
-	}
+    void ConsoleTty::setColor(Color fg_color, Color bg_color, Color attribute)
+    {
+        cout << "\033[" << attribute.getColorString() << ";" << bg_color.getColorString() << ";" << fg_color.getColorString() << "m";
+    }
 
-	void ConsoleTty::setColor(ColorStyle colorStyle)
-	{
-		setColor(colorStyle.fgColor, colorStyle.bgColor, colorStyle.Attribute);
-	}
+    void ConsoleTty::setColor(ColorStyle colorStyle)
+    {
+        setColor(colorStyle.fgColor, colorStyle.bgColor, colorStyle.Attribute);
+    }
 
-	void ConsoleTty::resetColor()
-	{
-		cout << "\033[0m";
-	}
+    void ConsoleTty::resetColor()
+    {
+        cout << "\033[0m";
+    }
 
-	void ConsoleTty::hideCursor()
-	{
-		if (cursorVisible) {
-			cout << "\033[?25l";
-			cursorVisible = false;
-		}
-	}
+    void ConsoleTty::hideCursor()
+    {
+        if (cursorVisible) {
+            cout << "\033[?25l";
+            cursorVisible = false;
+        }
+    }
 
-	void ConsoleTty::showCursor()
-	{
-		if (!cursorVisible) {
-			cout << "\033[?25h";
-			cursorVisible = true;
-		}
-	}
+    void ConsoleTty::showCursor()
+    {
+        if (!cursorVisible) {
+            cout << "\033[?25h";
+            cursorVisible = true;
+        }
+    }
 
-	bool ConsoleTty::isCursorVisible()
-	{
-		return cursorVisible;
-	}
+    bool ConsoleTty::isCursorVisible()
+    {
+        return cursorVisible;
+    }
 
-	void ConsoleTty::clearScreen()
-	{
-		cout << "\033[2J";
-	}
+    void ConsoleTty::clearScreen()
+    {
+        cout << "\033[2J";
+    }
 
-	void ConsoleTty::clearScreen(ColorStyle colorStyle)
-	{
-		setColor(colorStyle);
-		clearScreen();
-	}
+    void ConsoleTty::clearScreen(ColorStyle colorStyle)
+    {
+        setColor(colorStyle);
+        clearScreen();
+    }
 
-	void ConsoleTty::setPos(int col, int row)
-	{
-		cout << "\033[" << row << ";" << col << "f";
-	}
+    void ConsoleTty::setPos(int col, int row)
+    {
+        cout << "\033[" << row << ";" << col << "f";
+    }
 
-	Size ConsoleTty::getConsoleSize()
-	{
-		return _getConsoleSize();
-	}
+    Size ConsoleTty::getConsoleSize()
+    {
+        return _getConsoleSize();
+    }
 }

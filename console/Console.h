@@ -5,34 +5,34 @@
 #include "ConsoleTools.h"
 
 namespace Console {
-	class ConsoleTty {
-	private:
-		ConsoleTty();
+    class ConsoleTty {
+    private:
+        ConsoleTty();
 
-	public:
-		static ConsoleTty* getTty();
-		ColorSchemeManager* colorSchemeManager;
+    public:
+        static ConsoleTty* getTty();
+        ColorSchemeManager* colorSchemeManager;
 
-		ColorScheme getColorScheme();
+        ColorScheme getColorScheme();
 
-		void setColor(Color fg_color);
-		void setColor(Color fg_color, Color bg_color);
-		void setColor(Color fg_color, Color bg_color, Color attribute);
-		void setColor(ColorStyle colorStyle);
+        void setColor(Color fg_color);
+        void setColor(Color fg_color, Color bg_color);
+        void setColor(Color fg_color, Color bg_color, Color attribute);
+        void setColor(ColorStyle colorStyle);
 
-		void resetColor();
+        void resetColor();
 
-		void hideCursor();
-		void showCursor();
-		bool isCursorVisible();
+        void hideCursor();
+        void showCursor();
+        bool isCursorVisible();
 
-		void clearScreen();
-		void clearScreen(ColorStyle colorStyle);
-		void setPos(int col, int row);
-		Size getConsoleSize();
+        void clearScreen();
+        void clearScreen(ColorStyle colorStyle);
+        void setPos(int col, int row);
+        Size getConsoleSize();
 
-	private:
-		static ConsoleTty* instance;
-		bool cursorVisible;
-	};
+    private:
+        static ConsoleTty* instance;
+        bool cursorVisible;
+    };
 }
