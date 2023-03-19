@@ -6,13 +6,15 @@
 using namespace std;
 using namespace Console;
 
-class EventQueue {
+class EventQueue 
+{
 public:
     static EventQueue* GetInstance();
     bool UnprocessedEvents();
     void Loop();
     Event GetNextUnprocessedEvent();
     void Shutdown();
+    Size GetScreenSize();
 
 private:
     EventQueue();

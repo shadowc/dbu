@@ -82,3 +82,8 @@ Event EventQueue::GetNextUnprocessedEvent()
 
     return poppedEvent;
 }
+
+Size EventQueue::GetScreenSize()
+{
+    return lastScreenSize;
+}

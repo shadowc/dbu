@@ -11,6 +11,7 @@
 #include "console/ForegroundColors.h"
 #include "console/BackgroundColors.h"
 #include "console/Attributes.h"
+#include "widget/Screen.h"
 #include <iostream>
 #include <thread>
 #include <chrono>
@@ -19,61 +20,61 @@
 using namespace Console;
 using namespace std;
 
-void Paint();
+// void Paint();
 
-Size cacheSize;
-int lastChar;
-bool charChanged;
+// Size cacheSize;
+// int lastChar;
+// bool charChanged;
 
 int main()
 {
     ConsoleTty* console = ConsoleTty::getTty();
     EventQueue* eventQueue = EventQueue::GetInstance();
-    cacheSize = console->getConsoleSize();
+    // cacheSize = console->getConsoleSize();
     ColorScheme scheme = console->getColorScheme();
-    lastChar = 0;
+    // lastChar = 0;
 
     console->clearScreen(scheme.Paragraph);
     console->hideCursor();
-    Paint();
+    // Paint();
+
+    // Create screen UI
+    Screen* screen = new Screen();
+    screen->Invalidate();
+    screen->Draw();
 
     // Event loop
     bool exiting = false;
     while (!exiting) {
         eventQueue->Loop();
 
-        bool hadUnprocessedEvents = false;
         while (eventQueue->UnprocessedEvents()) {
             Event event = eventQueue->GetNextUnprocessedEvent();
 
             switch (event.Type) {
                 case (EventType::Keyboard):
-                    hadUnprocessedEvents = true;
-                    lastChar = event.KeyCode;
-                    charChanged = true;
-                    if (lastChar == 27) {
+                    // lastChar = event.KeyCode;
+                    // charChanged = true;
+                    if (event.KeyCode == 27) {
                         exiting = true;
                     }
 
                     break;
 
                 case (EventType::WindowResize):
-                    hadUnprocessedEvents = true;
-                    cacheSize.Width = event.NewScreenSize.Width;
-                    cacheSize.Height = event.NewScreenSize.Height;
+                    // cacheSize.Width = event.NewScreenSize.Width;
+                    // cacheSize.Height = event.NewScreenSize.Height;
+                    screen->OnResize();
 
                     break;
             }
-        }
-
-        if (hadUnprocessedEvents) {
-            Paint();
         }
 
         // Loop at 60 fps (probably overkill)
         this_thread::sleep_for(chrono::milliseconds(16));
     }
 
+    delete screen;
     console->showCursor();
     console->resetColor();
     console->clearScreen();
@@ -82,18 +83,18 @@ int main()
     return 0;
 }
 
-void Paint() {
-    ConsoleTty* console = ConsoleTty::getTty();
-    ColorScheme scheme = console->getColorScheme();
+// void Paint() {
+//     ConsoleTty* console = ConsoleTty::getTty();
+//     ColorScheme scheme = console->getColorScheme();
 
-    console->clearScreen();
+//     console->clearScreen();
 
-    console->setPos(1, cacheSize.Height);
-    console->setColor(scheme.Paragraph);
-    cout << "Console size: " << cacheSize.Width << ", " << cacheSize.Height;
+//     console->setPos(1, cacheSize.Height);
+//     console->setColor(scheme.Paragraph);
+//     cout << "Console size: " << cacheSize.Width << ", " << cacheSize.Height;
 
-    if (charChanged) {
-        cout << " Last char: " << lastChar;
-        charChanged = false;
-    }
-}
+//     if (charChanged) {
+//         cout << " Last char: " << lastChar;
+//         charChanged = false;
+//     }
+// }

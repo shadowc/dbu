@@ -34,6 +34,7 @@ set(
     "console/ColorSchemeManager.cpp"
     "console/ConsoleTools.cpp"
     "widget/AbstractWidget.cpp"
+    "widget/Screen.cpp"
 )
 
 # Add source to this project's executable.

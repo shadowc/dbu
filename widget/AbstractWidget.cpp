@@ -1,5 +1,6 @@
 #include "AbstractWidget.h"
 #include <vector>
+#include <iostream>
 
 using namespace std;
 
@@ -61,7 +62,7 @@ void AbstractWidget::SetSize(int w, int h) {
 }
 
 void AbstractWidget::Invalidate() {
-    invalidated = false;
+    invalidated = true;
 
     for (AbstractWidget* child : Children) {
         child->Invalidate();
