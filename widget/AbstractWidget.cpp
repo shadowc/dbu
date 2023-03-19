@@ -68,6 +68,8 @@ void AbstractWidget::Invalidate() {
     }
 }
 
+void AbstractWidget::OnResize() {}
+
 void AbstractWidget::Initialize() {}
 
 void AbstractWidget::RenderWidget() {}

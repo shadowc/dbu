@@ -19,6 +19,7 @@ public:
     void SetSize(Size newSize);
     void SetSize(int w, int h);
     void Invalidate();
+    virtual void OnResize();
 
 protected:
     bool invalidated;

@@ -83,13 +83,13 @@ namespace Console {
 
     void ConsoleTty::clearScreen()
     {
-        cout << "\033[2J";
+        cout << "\033c";
     }
 
     void ConsoleTty::clearScreen(ColorStyle colorStyle)
     {
         setColor(colorStyle);
-        clearScreen();
+        cout << "\033[2J";
     }
 
     void ConsoleTty::setPos(int col, int row)

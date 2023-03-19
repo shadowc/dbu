@@ -1,8 +1,10 @@
 #pragma once
 #include "EventDef.h"
 #include <deque>
+#include "../console/ConsoleTools.h"
 
 using namespace std;
+using namespace Console;
 
 class EventQueue {
 public:
@@ -19,4 +21,5 @@ private:
     deque<Event> queue;
 
     void PushEvent(Event newEvent);
+    Size lastScreenSize;
 };

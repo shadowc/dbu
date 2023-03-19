@@ -19,7 +19,7 @@
 using namespace Console;
 using namespace std;
 
-void Paint(ConsoleTty* console, bool force);
+void Paint();
 
 Size cacheSize;
 int lastChar;
@@ -30,23 +30,25 @@ int main()
     ConsoleTty* console = ConsoleTty::getTty();
     EventQueue* eventQueue = EventQueue::GetInstance();
     cacheSize = console->getConsoleSize();
+    ColorScheme scheme = console->getColorScheme();
     lastChar = 0;
 
+    console->clearScreen(scheme.Paragraph);
     console->hideCursor();
-    Paint(console, true);
+    Paint();
 
     // Event loop
     bool exiting = false;
     while (!exiting) {
-        Paint(console, false);
-
         eventQueue->Loop();
 
+        bool hadUnprocessedEvents = false;
         while (eventQueue->UnprocessedEvents()) {
             Event event = eventQueue->GetNextUnprocessedEvent();
 
             switch (event.Type) {
                 case (EventType::Keyboard):
+                    hadUnprocessedEvents = true;
                     lastChar = event.KeyCode;
                     charChanged = true;
                     if (lastChar == 27) {
@@ -54,7 +56,18 @@ int main()
                     }
 
                     break;
+
+                case (EventType::WindowResize):
+                    hadUnprocessedEvents = true;
+                    cacheSize.Width = event.NewScreenSize.Width;
+                    cacheSize.Height = event.NewScreenSize.Height;
+
+                    break;
             }
+        }
+
+        if (hadUnprocessedEvents) {
+            Paint();
         }
 
         // Loop at 60 fps (probably overkill)
@@ -69,23 +82,18 @@ int main()
     return 0;
 }
 
-void Paint(ConsoleTty* console, bool force) {
+void Paint() {
+    ConsoleTty* console = ConsoleTty::getTty();
     ColorScheme scheme = console->getColorScheme();
-    Size cSize = console->getConsoleSize();
 
-    if (cSize.Width != cacheSize.Width || cSize.Height != cacheSize.Height || force || charChanged) {
-        cacheSize.Width = cSize.Width;
-        cacheSize.Height = cSize.Height;
+    console->clearScreen();
 
-        console->clearScreen(scheme.Paragraph);
+    console->setPos(1, cacheSize.Height);
+    console->setColor(scheme.Paragraph);
+    cout << "Console size: " << cacheSize.Width << ", " << cacheSize.Height;
 
-        console->setPos(1, cSize.Height);
-        console->setColor(scheme.Paragraph);
-        cout << "Console size: " << cSize.Width << ", " << cSize.Height;
-
-        if (charChanged) {
-            cout << " Last char: " << lastChar;
-            charChanged = false;
-        }
+    if (charChanged) {
+        cout << " Last char: " << lastChar;
+        charChanged = false;
     }
 }
