@@ -2,6 +2,21 @@
 #include <platform.h>
 
 namespace Console {
+	struct Coords {
+		Coords() {
+			X = 0;
+			Y = 0;
+		}
+
+		Coords(int x, int y) {
+			X = x;
+			Y = y;
+		}
+
+		int X;
+		int Y;
+	};
+
 	struct Size {
 		Size() {
 			Width = 0;
@@ -19,11 +34,15 @@ namespace Console {
 
 	#ifdef __WIN32
 		#define _getConsoleSize __getConsoleSize_W
+		#define _initConsoleInputMode __initConsoleInputMode_W
 
 		Size __getConsoleSize_W();
+		void __initConsoleInputMode_W();
 	#else 
 		#define _getConsoleSize __getConsoleSize_L
+		#define _initConsoleInputMode __initConsoleInputMode_L
 
 		Size __getConsoleSize_L();
+		void __initConsoleInputMode_L();
 	#endif
 }

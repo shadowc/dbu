@@ -14,8 +14,8 @@ namespace Console {
 	ConsoleTty::ConsoleTty()
 	{
 		colorSchemeManager = new ColorSchemeManager();
-		cacheConsoleSize = Size();
 
+		_initConsoleInputMode();
 		// Start with cursorVisible=false and ensure we have a cursor
 		cursorVisible = false;
 		showCursor();
@@ -99,10 +99,6 @@ namespace Console {
 
 	Size ConsoleTty::getConsoleSize()
 	{
-		if (cacheConsoleSize.Width == 0 && cacheConsoleSize.Height == 0) {
-			cacheConsoleSize = _getConsoleSize();
-		}
-
-		return cacheConsoleSize;
+		return _getConsoleSize();
 	}
 }

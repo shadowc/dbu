@@ -33,7 +33,6 @@ namespace Console {
 
 	private:
 		static ConsoleTty* instance;
-		Size cacheConsoleSize;
 		bool cursorVisible;
 	};
 }
