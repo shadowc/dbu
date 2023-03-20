@@ -1,9 +1,9 @@
 #pragma once
 #include "EventQueue.h"
 #include <deque>
-#include <conio.h>
 #include "../console/Console.h"
 #include "../console/ConsoleTools.h"
+#include "KeyboardTools.h"
 
 using namespace std;
 using namespace Console;
@@ -37,12 +37,10 @@ bool EventQueue::UnprocessedEvents()
 
 void EventQueue::Loop()
 {
-    // Poll Keyboard Events
-    int lastChar = 0;
+    // TODO: Poll mouse events
 
-    while (_kbhit()) {
-        lastChar = _getch();
-    }
+    // Poll Keyboard Events
+    int lastChar = _getKeyboardInput();
 
     if (lastChar != 0) {
         Event event = Event();
