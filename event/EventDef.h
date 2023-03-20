@@ -21,7 +21,7 @@ struct Event {
     EventType Type;
 
     // Keyboard Data
-    char KeyCode;
+    int KeyCode;
     bool SpecialKey;
 
     // Window Resize Data

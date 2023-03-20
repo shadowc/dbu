@@ -10,5 +10,5 @@ public:
 
 protected:
     void RenderWidget() override;
-    char lastKeyCode;
+    int lastKeyCode;
 };

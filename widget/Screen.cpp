@@ -49,7 +49,7 @@ void Screen::RenderWidget()
     // Draw status bar
     console->FillLine(size.Height, coords.X, size.Width, ' ');
     console->setPos(2, size.Height);
-    cout << "Console size: " << size.Width << "x" << size.Height << " \u00B3 Last key Pressed: " << lastKeyCode << " \u00B3";
+    printf("Console size: %dx%d \u00B3 Last key pressed: %d \u00B3", size.Width, size.Height, lastKeyCode);
 
     console->setColor(scheme.Paragraph);
     for (int y = 2; y < size.Height - 1; y++) {

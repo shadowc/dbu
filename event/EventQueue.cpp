@@ -38,7 +38,7 @@ bool EventQueue::UnprocessedEvents()
 void EventQueue::Loop()
 {
     // Poll Keyboard Events
-    char lastChar = 0;
+    int lastChar = 0;
 
     while (_kbhit()) {
         lastChar = _getch();
