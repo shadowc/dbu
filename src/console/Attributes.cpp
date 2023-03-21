@@ -1,5 +1,5 @@
-#include "Attributes.h"
-#include "Color.h"
+#include "console/Attributes.h"
+#include "console/Color.h"
 
 namespace Console {
     Color Attributes::NORMAL = Color(1, "1");

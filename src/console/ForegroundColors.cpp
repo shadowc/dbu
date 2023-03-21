@@ -1,5 +1,5 @@
-#include "ForegroundColors.h"
-#include "Color.h"
+#include "console/ForegroundColors.h"
+#include "console/Color.h"
 
 namespace Console {
     Color ForegroundColors::BLACK = Color(30, "30");

@@ -1,5 +1,4 @@
-#pragma once
-#include "Color.h"
+#include "console/Color.h"
 
 using namespace std;
 

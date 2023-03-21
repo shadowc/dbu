@@ -1,7 +1,7 @@
 #define APP_VERSION_MAJOR @DBU_VERSION_MAJOR@
 #define APP_VERSION_MINOR @DBU_VERSION_MINOR@
 
-#define __PLATFORM @CMAKE_SYSTEM_NAME@
+#define __PLATFORM "@CMAKE_SYSTEM_NAME@"
 
 #cmakedefine __WIN32
 #cmakedefine __LINUX

@@ -1,5 +1,5 @@
-#include "ColorSchemeManager.h"
-#include "ColorScheme.h"
+#include "console/ColorSchemeManager.h"
+#include "console/ColorScheme.h"
 #include <string>
 #include <map>
 

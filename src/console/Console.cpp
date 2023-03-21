@@ -1,9 +1,9 @@
-#include "Console.h"
-#include "ConsoleTools.h"
-#include "Color.h"
-#include "ColorSchemeManager.h"
-#include "ColorScheme.h"
-#include "ColorStyle.h"
+#include "console/Console.h"
+#include "console/ConsoleTools.h"
+#include "console/Color.h"
+#include "console/ColorSchemeManager.h"
+#include "console/ColorScheme.h"
+#include "console/ColorStyle.h"
 #include <iostream>
 
 using namespace std;

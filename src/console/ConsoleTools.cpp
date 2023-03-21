@@ -1,5 +1,5 @@
 #include <platform.h>
-#include "ConsoleTools.h"
+#include "console/ConsoleTools.h"
 #include <stdio.h>
 
 #ifdef __WIN32

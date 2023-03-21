@@ -1,9 +1,8 @@
-#pragma once
-#include "EventQueue.h"
+#include "console/Console.h"
+#include "console/ConsoleTools.h"
+#include "event/EventQueue.h"
+#include "event/KeyboardTools.h"
 #include <deque>
-#include "../console/Console.h"
-#include "../console/ConsoleTools.h"
-#include "KeyboardTools.h"
 
 using namespace std;
 using namespace Console;

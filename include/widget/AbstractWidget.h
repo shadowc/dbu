@@ -21,12 +21,27 @@ public:
     void Invalidate();
     virtual void OnResize();
 
+    AbstractWidget* GetParent();
+    void SetParent(AbstractWidget*);
+    void RemoveParent();
+    void AddChild(AbstractWidget* child);
+    void RemoveChild(AbstractWidget* child);
+    void RemoveChildAt(int index);
+    int GetChildLength();
+    AbstractWidget* GetChildAt(int index);
+
+    unsigned int GetUniqueId();
 protected:
+    unsigned int uniqueId;
     bool invalidated;
     Coords coords;
     Size size;
-    vector<AbstractWidget*> Children;
+    vector<AbstractWidget*> children;
+    AbstractWidget* parent;
 
     virtual void RenderWidget();
     virtual void TearDown();
+
+    static unsigned int nextElementId;
+    static unsigned int generateId();
 };
