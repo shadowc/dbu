@@ -50,6 +50,7 @@ set(
     "src/console/ConsoleTools.cpp"
     "src/widget/AbstractWidget.cpp"
     "src/widget/Screen.cpp"
+    "src/widget/Dialog.cpp"
 )
 
 # Add source to this project's executable.

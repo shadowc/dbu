@@ -7,7 +7,7 @@ class Screen : public AbstractWidget
 {
 public:
     Screen();
-    virtual void OnResize();
+    void OnResize() override;
     void SetLastCharPressed(char keyCode);
 
 protected:

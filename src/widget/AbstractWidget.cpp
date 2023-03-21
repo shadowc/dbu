@@ -97,6 +97,8 @@ void AbstractWidget::AddChild(AbstractWidget* child)
 {
     if (child != nullptr) {
         children.push_back(child);
+        child->SetParent(this);
+        Invalidate();
     }
 }
 

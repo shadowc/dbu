@@ -12,11 +12,14 @@
 #include "console/BackgroundColors.h"
 #include "console/Attributes.h"
 #include "widget/Screen.h"
+#include "widget/Dialog.h"
 #include <thread>
 #include <chrono>
 
 using namespace Console;
 using namespace std;
+
+void BuildUI(Screen* screen);
 
 int main()
 {
@@ -29,6 +32,9 @@ int main()
 
     // Create screen UI
     Screen* screen = new Screen();
+
+    BuildUI(screen);
+
     screen->Invalidate();
     screen->Draw();
 
@@ -70,4 +76,13 @@ int main()
     eventQueue->Shutdown();
 
     return 0;
+}
+
+void BuildUI(Screen* screen)
+{
+    Dialog* connectionDialog = new Dialog();
+    connectionDialog->SetTitle(" MySQL Connection ");
+    connectionDialog->SetVisible(true);
+
+    screen->AddChild(connectionDialog);
 }

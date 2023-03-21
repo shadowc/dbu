@@ -83,7 +83,7 @@ namespace Console {
 
     void ConsoleTty::FillLine(int y, int from, int to, char c)
     {
-        setPos(1, y);
+        setPos(from, y);
         for (int i = from; i <= to; i++) {
             cout << c;
         }
