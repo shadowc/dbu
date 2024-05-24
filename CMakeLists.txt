@@ -30,8 +30,6 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     message(NOTICE "Make sure you have ncurses-devel package installed")
     message(NOTICE "sudo apt-get install libncurses-dev")
     message(NOTICE "...")
-
-    target_link_libraries(DBU "libncurses")
 endif()
 
 configure_file(platform.h.in platform.h)
@@ -61,3 +59,7 @@ target_include_directories(DBU PUBLIC
     "${EXTRA_INCLUDES_PATH}"
     "${PROJECT_BINARY_DIR}"
 )
+
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    target_link_libraries(DBU "libncurses")
+endif()
