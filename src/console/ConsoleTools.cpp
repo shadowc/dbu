@@ -54,9 +54,10 @@ namespace Console {
     void __initConsoleInputMode_L()
     {
         initscr();
-        noecho();
         cbreak();
-        keypad(stdscr, TRUE);
+        noecho();
+        nodelay(stdscr, TRUE);
+        scrollok(stdscr, TRUE);
     }
 
     void __cleanupConsoleInputMode_L()

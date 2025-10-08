@@ -33,10 +33,6 @@ int kbhit()
 
 int __getKeyboardInput_L()
 {
-    noecho();
-    nodelay(stdscr, TRUE);
-    scrollok(stdscr, TRUE);
-
     int lastChar = 0;
 
     while (kbhit()) {

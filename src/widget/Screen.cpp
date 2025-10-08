@@ -58,7 +58,7 @@ void Screen::RenderWidget()
     printf("| Last key pressed: %d ", lastKeyCode);
 
     console->setColor(scheme.Paragraph);
-    for (int y = 2; y < size.Height - 1; y++) {
+    for (int y = 2; y < size.Height; y++) {
         console->FillLine(y, coords.X, size.Width, ' ');
     }
 }
