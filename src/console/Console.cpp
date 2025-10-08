@@ -5,6 +5,7 @@
 #include "console/ColorScheme.h"
 #include "console/ColorStyle.h"
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
@@ -19,6 +20,11 @@ namespace Console {
         // Start with cursorVisible=false and ensure we have a cursor
         cursorVisible = false;
         showCursor();
+    }
+
+    void ConsoleTty::shutdown()
+    {
+        _cleanupConsoleInputMode();
     }
 
     ConsoleTty* ConsoleTty::getTty()

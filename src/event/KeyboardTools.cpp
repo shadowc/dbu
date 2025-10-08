@@ -8,7 +8,7 @@
 
 #ifdef __WIN32
 
-int _getKeyboardInput()
+int __getKeyboardInput_W()
 {
     int lastChar = 0;
     while (_kbhit()) {
@@ -19,10 +19,34 @@ int _getKeyboardInput()
 
 #else
 
+int kbhit();
+
+int kbhit()
+{
+    int ch = getch();
+
+    if (ch != ERR) {
+        ungetch(ch);
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
 int __getKeyboardInput_L()
 {
+    noecho();
+    nodelay(stdscr, TRUE);
+    scrollok(stdscr, TRUE);
+
+    int lastChar = 0;
+
+    while (kbhit()) {
+        lastChar = getch();
+    }
+    
     // TODO: Implement using ncurses
-    return 0;
+    return lastChar;
 }
 
 #endif

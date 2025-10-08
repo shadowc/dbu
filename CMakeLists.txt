@@ -61,5 +61,5 @@ target_include_directories(DBU PUBLIC
 )
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
-    target_link_libraries(DBU "libncurses")
+    target_link_libraries(DBU ncurses)
 endif()

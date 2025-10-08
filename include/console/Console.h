@@ -34,6 +34,8 @@ namespace Console {
         void setPos(int col, int row);
         Size getConsoleSize();
 
+        void shutdown();
+
     private:
         static ConsoleTty* instance;
         bool cursorVisible;

@@ -6,6 +6,7 @@
 #include <Windows.h>
 #else
 #include <sys/ioctl.h>
+#include <ncurses.h>
 #endif
 
 namespace Console {
@@ -35,6 +36,11 @@ namespace Console {
         SetConsoleMode(hIn, dwInMode);
     }
 
+    void __cleanupConsoleInputMode_W()
+    {
+        // Windows cleanup if needed
+    }
+
     #else
 
     Size __getConsoleSize_L()
@@ -47,6 +53,15 @@ namespace Console {
 
     void __initConsoleInputMode_L()
     {
+        initscr();
+        noecho();
+        cbreak();
+        keypad(stdscr, TRUE);
+    }
+
+    void __cleanupConsoleInputMode_L()
+    {
+        endwin();
     }
 
     #endif

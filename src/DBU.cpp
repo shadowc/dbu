@@ -57,6 +57,7 @@ int main()
                     break;
 
                 case (EventType::WindowResize):
+                    this_thread::sleep_for(chrono::milliseconds(5));
                     screen->OnResize();
 
                     break;
@@ -73,6 +74,7 @@ int main()
     console->showCursor();
     console->resetColor();
     console->clearScreen();
+    console->shutdown();
     eventQueue->Shutdown();
 
     return 0;

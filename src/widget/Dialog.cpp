@@ -2,7 +2,7 @@
 #include "widget/AbstractWidget.h"
 #include "console/ConsoleTools.h"
 #include "console/Console.h"
-
+#include <cmath>
 #include <iostream>
 
 using namespace Console;
