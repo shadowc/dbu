@@ -30,7 +30,6 @@ namespace Console {
         void CenterString(int y, int from, int to, string str);
 
         void clearScreen();
-        void clearScreen(ColorStyle colorStyle);
         void setPos(int col, int row);
         Size getConsoleSize();
 

@@ -19,8 +19,6 @@ int __getKeyboardInput_W()
 
 #else
 
-int kbhit();
-
 int kbhit()
 {
     int ch = getch();
@@ -44,8 +42,7 @@ int __getKeyboardInput_L()
     while (kbhit()) {
         lastChar = getch();
     }
-    
-    // TODO: Implement using ncurses
+
     return lastChar;
 }
 

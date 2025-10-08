@@ -27,7 +27,7 @@ int main()
     EventQueue* eventQueue = EventQueue::GetInstance();
     ColorScheme scheme = console->getColorScheme();
 
-    console->clearScreen(scheme.Paragraph);
+    console->clearScreen();
     console->hideCursor();
 
     // Create screen UI
@@ -50,6 +50,7 @@ int main()
                 case (EventType::Keyboard):
                     if (event.KeyCode == 27) {
                         exiting = true;
+                        break;
                     }
 
                     screen->SetLastCharPressed(event.KeyCode);
@@ -64,10 +65,12 @@ int main()
             }
         }
 
-        screen->Draw();
+        if (!exiting) {
+            screen->Draw();
         
-        // Loop at 60 fps (probably overkill)
-        this_thread::sleep_for(chrono::milliseconds(16));
+            // Loop at 60 fps (probably overkill)
+            this_thread::sleep_for(chrono::milliseconds(16));
+        }
     }
 
     delete screen;

@@ -44,32 +44,32 @@ void Dialog::RenderWidget()
     Coords parentCoords = parent->GetPosition();
     Size parentSize = parent->GetSize();
 
-    coords.X = floor(float((parentSize.Width - parentCoords.X - 1) / 2.0f)) - floor(float(size.Width / 2.0f));
-    coords.Y = floor(float((parentSize.Height - parentCoords.Y - 1) / 2.0f)) - floor(float(size.Height / 2.0f));
+    coords.X = max(0, parentCoords.X + (int) floor(float(parentSize.Width / 2.0f)) - (int) floor(float(size.Width / 2.0f)));
+    coords.Y = max(0, parentCoords.Y + (int) floor(float(parentSize.Height / 2.0f)) - (int) floor(float(size.Height / 2.0f)));
 
     // paint background
     console->setColor(scheme.TitleBar);
 
     // Build top
     console->setPos(coords.X, coords.Y);
-    printf("\u00DA");
-    console->FillLine(coords.Y, coords.X + 1, size.Width - 1, '\u00C4');
-    printf("\u00BF");
+    printf("+");
+    console->FillLine(coords.Y, coords.X + 1, coords.X + size.Width - 1, '-');
+    printf("+");
 
     // Center title
-    console->CenterString(coords.Y, coords.X, size.Width, title);
+    console->CenterString(coords.Y, coords.X, coords.X + size.Width, title);
 
     // fill dialog
     for (int i = coords.Y + 1; i < coords.Y + size.Height; i++) {
         console->setPos(coords.X, i);
-        printf("\u00B3");
-        console->FillLine(i, coords.X + 1, size.Width - 1, ' ');
-        printf("\u00B3");
+        printf("|");
+        console->FillLine(i, coords.X + 1, coords.X + size.Width - 1, ' ');
+        printf("|");
     }
 
     // Build bottom
     console->setPos(coords.X, coords.Y + size.Height);
-    printf("\u00C0");
-    console->FillLine(coords.Y + size.Height, coords.X + 1, size.Width - 1, '\u00C4');
-    printf("\u00D9");
+    printf("+");
+    console->FillLine(coords.Y + size.Height, coords.X + 1, coords.X + size.Width - 1, '-');
+    printf("+");
 }

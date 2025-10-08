@@ -17,6 +17,7 @@ namespace Console {
         colorSchemeManager = new ColorSchemeManager();
 
         _initConsoleInputMode();
+
         // Start with cursorVisible=false and ensure we have a cursor
         cursorVisible = false;
         showCursor();
@@ -106,12 +107,6 @@ namespace Console {
     void ConsoleTty::clearScreen()
     {
         cout << "\033c";
-    }
-
-    void ConsoleTty::clearScreen(ColorStyle colorStyle)
-    {
-        setColor(colorStyle);
-        cout << "\033[2J";
     }
 
     void ConsoleTty::setPos(int col, int row)
