@@ -50,26 +50,8 @@ void Dialog::RenderWidget()
     // paint background
     console->setColor(scheme.TitleBar);
 
-    // Build top
-    console->setPos(coords.X, coords.Y);
-    printf("+");
-    console->FillLine(coords.Y, coords.X + 1, coords.X + size.Width - 1, '-');
-    printf("+");
+    console->DrawBox(coords.X, coords.Y, size.Width, size.Height);
 
     // Center title
     console->CenterString(coords.Y, coords.X, coords.X + size.Width, title);
-
-    // fill dialog
-    for (int i = coords.Y + 1; i < coords.Y + size.Height; i++) {
-        console->setPos(coords.X, i);
-        printf("|");
-        console->FillLine(i, coords.X + 1, coords.X + size.Width - 1, ' ');
-        printf("|");
-    }
-
-    // Build bottom
-    console->setPos(coords.X, coords.Y + size.Height);
-    printf("+");
-    console->FillLine(coords.Y + size.Height, coords.X + 1, coords.X + size.Width - 1, '-');
-    printf("+");
 }

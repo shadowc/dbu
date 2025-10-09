@@ -88,6 +88,14 @@ namespace Console {
         return cursorVisible;
     }
 
+    void ConsoleTty::FillLine(int y, int from, int to, const char* c)
+    {
+        setPos(from, y);
+        for (int i = from; i <= to; i++) {
+            printf("%s", c);
+        }
+    }
+
     void ConsoleTty::FillLine(int y, int from, int to, char c)
     {
         setPos(from, y);
@@ -102,6 +110,29 @@ namespace Console {
     
         setPos(from + (int)(floor((float)width / 2.0f) - floor((float)str.length() / 2)), y);
         cout << str;
+    }
+
+    void ConsoleTty::DrawBox(int x, int y, int width, int height)
+    {
+        // Build top
+        setPos(x, y);
+        printf("┌");
+        FillLine(y, x + 1, x + width - 1, "─");
+        printf("┐");
+
+        // fill dialog
+        for (int i = y + 1; i < y + height; i++) {
+            setPos(x, i);
+            printf("│");
+            FillLine(i, x + 1, x + width - 1, ' ');
+            printf("│");
+        }
+
+        // Build bottom
+        setPos(x, y + height);
+        printf("└");
+        FillLine(y + height, x + 1, x + width - 1, "─");
+        printf("┘");
     }
 
     void ConsoleTty::clearScreen()

@@ -26,8 +26,10 @@ namespace Console {
         void showCursor();
         bool isCursorVisible();
 
+        void FillLine(int y, int from, int to, const char* c);
         void FillLine(int y, int from, int to, char c);
         void CenterString(int y, int from, int to, string str);
+        void DrawBox(int x, int y, int width, int height);
 
         void clearScreen();
         void setPos(int col, int row);
