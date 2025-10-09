@@ -36,7 +36,10 @@ void AbstractWidget::Draw() {
         invalidated = false;
     }
 
-    ConsoleTty::getTty()->Flush();
+    // Flush the console output if this is the top-level widget
+    if (parent == nullptr) {
+        ConsoleTty::getTty()->Flush();
+    }
 }
 
 Coords AbstractWidget::GetPosition() {
