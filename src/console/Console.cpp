@@ -106,7 +106,7 @@ namespace Console {
 
     void ConsoleTty::clearScreen()
     {
-        cout << "\033c";
+        cout << "\033c" << std::flush;
     }
 
     void ConsoleTty::setPos(int col, int row)
@@ -117,5 +117,10 @@ namespace Console {
     Size ConsoleTty::getConsoleSize()
     {
         return _getConsoleSize();
+    }
+
+    void ConsoleTty::Flush()
+    {
+        cout << std::flush;
     }
 }

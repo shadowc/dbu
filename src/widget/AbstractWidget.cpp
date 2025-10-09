@@ -1,4 +1,5 @@
 #include "widget/AbstractWidget.h"
+#include "console/Console.h"
 #include <vector>
 #include <iostream>
 
@@ -34,6 +35,8 @@ void AbstractWidget::Draw() {
 
         invalidated = false;
     }
+
+    ConsoleTty::getTty()->Flush();
 }
 
 Coords AbstractWidget::GetPosition() {

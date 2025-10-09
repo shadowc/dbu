@@ -33,6 +33,8 @@ namespace Console {
         void setPos(int col, int row);
         Size getConsoleSize();
 
+        void Flush();
+
         void shutdown();
 
     private:
