@@ -18,7 +18,7 @@ public:
     Size GetSize();
     void SetSize(Size newSize);
     void SetSize(int w, int h);
-    void Invalidate();
+    virtual void Invalidate();
     virtual void OnResize();
 
     AbstractWidget* GetParent();

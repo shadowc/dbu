@@ -11,6 +11,7 @@ public:
     void SetVisible(bool newVisible);
     void SetTitle(string newTitle);
     bool HasActiveMask() override;
+    void Invalidate() override;
 
 protected:
     void RenderWidget() override;

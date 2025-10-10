@@ -26,7 +26,7 @@ void Screen::OnResize()
     Size screenSize = EventQueue::GetInstance()->GetScreenSize();
 
     size.Width = screenSize.Width;
-    size.Height= screenSize.Height;
+    size.Height = screenSize.Height;
 
     Invalidate();
 }

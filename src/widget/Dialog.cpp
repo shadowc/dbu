@@ -35,25 +35,12 @@ void Dialog::SetTitle(string newTitle)
 
 void Dialog::RenderWidget()
 {
-    AbstractWidget* screen = parent;
-
-    if (parent == nullptr) {
-        return;
-    }
-
     if (!visible) {
         return;
     }
 
     ConsoleTty* console = ConsoleTty::getTty();
     ColorScheme scheme = console->getColorScheme();
-
-    // center dialog on parent screenspace
-    Coords parentCoords = parent->GetPosition();
-    Size parentSize = parent->GetSize();
-
-    coords.X = max(0, parentCoords.X + (int) floor(float(parentSize.Width / 2.0f)) - (int) floor(float(size.Width / 2.0f)));
-    coords.Y = max(0, parentCoords.Y + (int) floor(float(parentSize.Height / 2.0f)) - (int) floor(float(size.Height / 2.0f)));
 
     // paint background
     console->setColor(scheme.TitleBar);
@@ -67,4 +54,18 @@ void Dialog::RenderWidget()
 bool Dialog::HasActiveMask()
 {
     return visible;
+}
+
+void Dialog::Invalidate()
+{
+    AbstractWidget::Invalidate();
+
+    if (parent != nullptr) {
+       // center dialog on parent screenspace
+        Coords parentCoords = parent->GetPosition();
+        Size parentSize = parent->GetSize();
+
+        coords.X = max(0, parentCoords.X + (int) floor(float(parentSize.Width / 2.0f)) - (int) floor(float(size.Width / 2.0f)));
+        coords.Y = max(0, parentCoords.Y + (int) floor(float(parentSize.Height / 2.0f)) - (int) floor(float(size.Height / 2.0f)));
+    }
 }
