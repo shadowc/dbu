@@ -47,29 +47,30 @@ void Menu::SetSidePadding(int padding)
 
 void Menu::SetSelectedItem(int index)
 {
-    for (size_t i = 0; i < children.size(); ++i) {
-        MenuItem* otherMenuItem = dynamic_cast<MenuItem*>(children[i]);
+    for (AbstractWidget* child : children) {
+        MenuItem* childMenuItem = dynamic_cast<MenuItem*>(child);
 
-        if (otherMenuItem != nullptr && otherMenuItem->IsSelected()) {
-            otherMenuItem->SetSelected(false);
+        if (childMenuItem != nullptr && childMenuItem->IsSelected()) {
+            childMenuItem->SetSelected(false);
         }
     }
 
-    if (index < 0 || index >= static_cast<int>(children.size())) {
+    if (index < 0 || index >= GetChildLength()) {
         return;
     }
 
-    MenuItem* menuItem = dynamic_cast<MenuItem*>(children[index]);
+    MenuItem* menuItem = dynamic_cast<MenuItem*>(GetChildAt(index));
 
     if (menuItem != nullptr) {
         menuItem->SetSelected(true);
     }
 }
 
-int Menu::GetSelectedItem() const
+int Menu::GetSelectedItem()
 {
-    for (size_t i = 0; i < children.size(); ++i) {
-        MenuItem* menuItem = dynamic_cast<MenuItem*>(children[i]);
+    for (int i = 0; i < GetChildLength(); i++) {
+        MenuItem* menuItem = dynamic_cast<MenuItem*>(GetChildAt(i));
+
         if (menuItem != nullptr && menuItem->IsSelected()) {
             return i;
         }

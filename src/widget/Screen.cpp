@@ -103,10 +103,10 @@ void Screen::OnEvent(Event event)
     }
 }
 
-Menu* Screen::FindMenu() const
+Menu* Screen::FindMenu()
 {
-    for (size_t i = 0; i < children.size(); ++i) {
-        Menu* menu = dynamic_cast<Menu*>(children[i]);
+    for (int i = 0; i < GetChildLength(); ++i) {
+        Menu* menu = dynamic_cast<Menu*>(GetChildAt(i));
 
         if (menu != nullptr) {
             return menu;

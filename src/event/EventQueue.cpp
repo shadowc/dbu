@@ -119,6 +119,13 @@ void EventQueue::ProcessNextEvent(AbstractWidget* root)
 
 void EventQueue::SetCurrentFocusedWidget(AbstractWidget *widget)
 {
+    // If we are setting focus to null, this means we are comming from AbstractWidget::Blur
+    // So don't generate an endless recursive call to Blur
+    if (widget == nullptr) {
+        currentFocusedWidget = nullptr;
+        return;
+    }
+
     if (currentFocusedWidget != nullptr) {
         if (currentFocusedWidget->GetUniqueId() == widget->GetUniqueId()) {
             return;

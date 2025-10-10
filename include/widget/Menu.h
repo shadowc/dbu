@@ -15,7 +15,7 @@ public:
     void SetSidePadding(int padding);
 
     void SetSelectedItem(int index);
-    int GetSelectedItem() const;
+    int GetSelectedItem();
 
 protected:
     void Invalidate() override;

@@ -22,5 +22,5 @@ protected:
     string versionMajor;
     string versionMinor;
 
-    Menu* FindMenu() const;
+    Menu* FindMenu();
 };
