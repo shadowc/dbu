@@ -41,7 +41,7 @@ int main()
     // Event loop
     bool exiting = false;
     while (!exiting) {
-        eventQueue->Loop();
+        eventQueue->Loop(screen);
 
         while (eventQueue->UnprocessedEvents()) {
             Event event = eventQueue->GetNextUnprocessedEvent();

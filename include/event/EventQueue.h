@@ -6,12 +6,14 @@
 using namespace std;
 using namespace Console;
 
+class AbstractWidget;
+
 class EventQueue 
 {
 public:
     static EventQueue* GetInstance();
     bool UnprocessedEvents();
-    void Loop();
+    void Loop(AbstractWidget* root);
     Event GetNextUnprocessedEvent();
     void Shutdown();
     Size GetScreenSize();
@@ -24,4 +26,6 @@ private:
 
     void PushEvent(Event newEvent);
     Size lastScreenSize;
+
+    bool firstPoll = true;
 };

@@ -2,6 +2,7 @@
 #include "console/ConsoleTools.h"
 #include "event/EventQueue.h"
 #include "event/KeyboardTools.h"
+#include "widget/AbstractWidget.h"
 #include <deque>
 
 using namespace std;
@@ -34,12 +35,18 @@ bool EventQueue::UnprocessedEvents()
     return !queue.empty();
 }
 
-void EventQueue::Loop()
+void EventQueue::Loop(AbstractWidget* root)
 {
     // TODO: Poll mouse events
 
     // Poll Keyboard Events
     int lastChar = _getKeyboardInput();
+
+    if (firstPoll) {
+        root->Invalidate();
+        root->Draw();
+        firstPoll = false;
+    }
 
     if (lastChar != 0) {
         Event event = Event();
