@@ -14,6 +14,8 @@
 #include "console/Attributes.h"
 #include "widget/Screen.h"
 #include "widget/Dialog.h"
+#include "widget/Menu.h"
+#include "widget/MenuItem.h"
 #include <thread>
 #include <chrono>
 
@@ -99,6 +101,18 @@ Dialog* BuildUI(Screen* screen)
     connectionDialog->SetVisible(true);
 
     screen->AddChild(connectionDialog);
+
+    Menu* mainMenu = new Menu();
+
+    MenuItem* connectionMenuItem = new MenuItem();
+    connectionMenuItem->SetLabel(" Connections ");
+    mainMenu->AddChild(connectionMenuItem);
+
+    MenuItem* exitMenuItem = new MenuItem();
+    exitMenuItem->SetLabel(" Exit ");
+    mainMenu->AddChild(exitMenuItem);
+
+    screen->AddChild(mainMenu);
 
     return connectionDialog;
 }

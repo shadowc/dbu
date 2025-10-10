@@ -11,9 +11,21 @@ namespace Console {
             ButtonPrimary = ColorStyle();
             ButtonSecondary = ColorStyle();
             ButtonDanger = ColorStyle();
+            Menu = ColorStyle();
+            MenuSelected = ColorStyle();
         }
 
-        ColorScheme(ColorStyle p, ColorStyle hi, ColorStyle h, ColorStyle t, ColorStyle btnP, ColorStyle btnS, ColorStyle btnD) {
+        ColorScheme(
+            ColorStyle p,
+            ColorStyle hi,
+            ColorStyle h,
+            ColorStyle t,
+            ColorStyle btnP,
+            ColorStyle btnS,
+            ColorStyle btnD,
+            ColorStyle m,
+            ColorStyle mS
+        ) {
             Paragraph = p;
             Highlight = hi;
             Heading = h;
@@ -21,6 +33,8 @@ namespace Console {
             ButtonPrimary = btnP;
             ButtonSecondary = btnS;
             ButtonDanger = btnD;
+            Menu = m;
+            MenuSelected = mS;
         }
 
         ColorStyle Paragraph;
@@ -30,5 +44,7 @@ namespace Console {
         ColorStyle ButtonPrimary;
         ColorStyle ButtonSecondary;
         ColorStyle ButtonDanger;
+        ColorStyle Menu;
+        ColorStyle MenuSelected;
     };
 }

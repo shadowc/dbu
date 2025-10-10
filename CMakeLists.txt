@@ -49,6 +49,8 @@ set(
     "src/widget/AbstractWidget.cpp"
     "src/widget/Screen.cpp"
     "src/widget/Dialog.cpp"
+    "src/widget/Menu.cpp"
+    "src/widget/MenuItem.cpp"
 )
 
 # Add source to this project's executable.
