@@ -3,15 +3,7 @@
 
 #include "DBU.h"
 #include "event/EventQueue.h"
-#include "event/EventDef.h"
-#include "event/KeyCodes.h"
 #include "console/Console.h"
-#include "console/ConsoleTools.h"
-#include "console/Color.h"
-#include "console/ColorScheme.h"
-#include "console/ForegroundColors.h"
-#include "console/BackgroundColors.h"
-#include "console/Attributes.h"
 #include "widget/Screen.h"
 #include "widget/Dialog.h"
 #include "widget/Menu.h"
@@ -28,7 +20,6 @@ int main()
 {
     ConsoleTty* console = ConsoleTty::getTty();
     EventQueue* eventQueue = EventQueue::GetInstance();
-    ColorScheme scheme = console->getColorScheme();
 
     console->clearScreen();
     console->hideCursor();
@@ -41,36 +32,16 @@ int main()
     screen->Draw();
 
     // Event loop
-    bool exiting = false;
-    while (!exiting) {
+    while (!eventQueue->IsExiting()) {
         // We need to pass screen here to perform the first draw because ncurses clears the
         // screen the first time we poll for input
         eventQueue->Loop(screen);
 
         while (eventQueue->UnprocessedEvents()) {
-            Event event = eventQueue->GetNextUnprocessedEvent();
-
-            switch (event.Type) {
-                case (EventType::Keyboard):
-                    switch (event.KeyCode) {
-                        case (KEY_ESC):
-                            exiting = true;
-                            break;
-                    }
-
-                    screen->SetLastCharPressed(event.KeyCode);
-
-                    break;
-
-                case (EventType::WindowResize):
-                    this_thread::sleep_for(chrono::milliseconds(5));
-                    screen->OnResize();
-
-                    break;
-            }
+            eventQueue->ProcessNextEvent(screen);
         }
 
-        if (!exiting) {
+        if (!eventQueue->IsExiting()) {
             screen->Draw();
         
             // Loop at 60 fps (probably overkill)

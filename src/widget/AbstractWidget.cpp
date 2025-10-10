@@ -1,5 +1,6 @@
 #include "widget/AbstractWidget.h"
 #include "console/Console.h"
+#include "event/EventQueue.h"
 #include <vector>
 #include <iostream>
 
@@ -124,6 +125,25 @@ unsigned int AbstractWidget::GetUniqueId()
     return uniqueId;
 }
 
+bool AbstractWidget::HasFocus()
+{
+    return hasFocus;
+}
+
+void AbstractWidget::Focus()
+{
+    hasFocus = true;
+
+    EventQueue::GetInstance()->SetCurrentFocusedWidget(this);
+}
+
+void AbstractWidget::Blur()
+{
+    hasFocus = false;
+
+    EventQueue::GetInstance()->SetCurrentFocusedWidget(nullptr);
+}
+
 int AbstractWidget::GetChildLength()
 {
     return (int)children.size();
@@ -231,4 +251,9 @@ void AbstractWidget::SetColorScheme(string newColorScheme)
 string AbstractWidget::GetColorScheme()
 {
     return colorScheme;
+}
+
+void AbstractWidget::OnEvent(Event event)
+{
+    // Base implementation does nothing
 }

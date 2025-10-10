@@ -3,8 +3,11 @@
 #include "console/Console.h"
 #include "console/ConsoleTools.h"
 #include "event/EventQueue.h"
+#include "event/KeyCodes.h"
 #include <iostream>
 #include <string>
+#include <thread>
+#include <chrono>
 
 using namespace Console;
 using namespace std;
@@ -66,4 +69,25 @@ void Screen::RenderWidget()
 bool Screen::HasActiveMask()
 {
     return false;
+}
+
+void Screen::OnEvent(Event event)
+{
+    switch (event.Type) {
+        case (EventType::Keyboard):
+            switch (event.KeyCode) {
+                case (KEY_ESC):
+                    EventQueue::GetInstance()->Exit();
+                    break;
+            }
+
+            SetLastCharPressed(event.KeyCode);
+
+            break;
+
+        case (EventType::WindowResize):
+            this_thread::sleep_for(chrono::milliseconds(5));
+            OnResize();
+            break;
+    }
 }

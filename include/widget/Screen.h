@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AbstractWidget.h"
+#include "event/EventDef.h"
 #include <string>
 
 class Screen : public AbstractWidget
@@ -10,6 +11,7 @@ public:
     void OnResize() override;
     void SetLastCharPressed(char keyCode);
     bool HasActiveMask() override;
+    void OnEvent(Event event) override;
 
 protected:
     void RenderWidget() override;

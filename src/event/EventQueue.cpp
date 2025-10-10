@@ -93,3 +93,49 @@ Size EventQueue::GetScreenSize()
 {
     return lastScreenSize;
 }
+
+void EventQueue::ProcessNextEvent(AbstractWidget* root)
+{
+    Event event = GetNextUnprocessedEvent();
+
+    // focus on the root widget if no widget has focus
+    if (currentFocusedWidget == nullptr) {
+        root->Focus();
+    }
+
+    if (currentFocusedWidget != nullptr) {
+        currentFocusedWidget->OnEvent(event);
+
+        if (event.Bubbling) {
+            AbstractWidget* parent = currentFocusedWidget->GetParent();
+
+            while (parent != nullptr && event.Bubbling) {
+                parent->OnEvent(event);
+                parent = parent->GetParent();
+            }
+        }
+    }
+}
+
+void EventQueue::SetCurrentFocusedWidget(AbstractWidget *widget)
+{
+    if (currentFocusedWidget != nullptr) {
+        if (currentFocusedWidget->GetUniqueId() == widget->GetUniqueId()) {
+            return;
+        }
+
+        currentFocusedWidget->Blur();
+    }
+
+    currentFocusedWidget = widget;
+}
+
+void EventQueue::Exit()
+{
+    exiting = true;
+}
+
+bool EventQueue::IsExiting()
+{
+    return exiting;
+}

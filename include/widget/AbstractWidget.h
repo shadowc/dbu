@@ -1,5 +1,6 @@
 #pragma once
-#include "../console/ConsoleTools.h"
+#include "console/ConsoleTools.h"
+#include "event/EventDef.h"
 #include <vector>
 #include <string>
 
@@ -37,6 +38,13 @@ public:
     string GetColorScheme();
 
     unsigned int GetUniqueId();
+
+    bool HasFocus();
+    void Focus();
+    void Blur();
+
+    virtual void OnEvent(Event event);
+
 protected:
     unsigned int uniqueId;
     bool invalidated;
@@ -53,4 +61,6 @@ protected:
 
     static unsigned int nextElementId;
     static unsigned int generateId();
+
+    bool hasFocus = false;
 };

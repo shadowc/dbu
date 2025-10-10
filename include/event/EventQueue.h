@@ -17,6 +17,12 @@ public:
     Event GetNextUnprocessedEvent();
     void Shutdown();
     Size GetScreenSize();
+    void ProcessNextEvent(AbstractWidget* root);
+
+    void SetCurrentFocusedWidget(AbstractWidget* widget);
+
+    void Exit();
+    bool IsExiting();
 
 private:
     EventQueue();
@@ -28,4 +34,8 @@ private:
     Size lastScreenSize;
 
     bool firstPoll = true;
+
+    AbstractWidget* currentFocusedWidget = nullptr;
+
+    bool exiting = false;
 };

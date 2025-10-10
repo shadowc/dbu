@@ -16,9 +16,11 @@ struct Event {
         KeyCode = 0;
         SpecialKey = false;
         NewScreenSize = Size();
+        Bubbling = true;
     }
 
     EventType Type;
+    bool Bubbling;
 
     // Keyboard Data
     int KeyCode;
