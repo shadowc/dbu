@@ -100,9 +100,9 @@ namespace Console {
 
     void ConsoleTty::FillLine(int y, int from, int to, char c)
     {
-        setPos(from, y);
         for (int i = from; i <= to; i++) {
             if (!isMasked(i, y)) {
+                setPos(i, y);
                 cout << c;
             }
         }

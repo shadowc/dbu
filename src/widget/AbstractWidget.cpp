@@ -26,15 +26,17 @@ AbstractWidget::~AbstractWidget() {
 }
 
 void AbstractWidget::Draw() {
+    ConsoleTty* console = ConsoleTty::getTty();
+
     if (invalidated) {
         for (AbstractWidget* child : children) {
             if (child->HasActiveMask()) {
-                ConsoleTty::getTty()->AddMask(child->GetActiveMask());
+                console->AddMask(child->GetActiveMask());
             }
         }
 
         RenderWidget();
-        ConsoleTty::getTty()->clearMasks();
+        console->clearMasks();
 
         for (AbstractWidget* child : children) {
             child->Draw();
@@ -45,7 +47,7 @@ void AbstractWidget::Draw() {
 
     // Flush the console output if this is the top-level widget
     if (parent == nullptr) {
-        ConsoleTty::getTty()->Flush();
+        console->Flush();
     }
 }
 
