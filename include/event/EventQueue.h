@@ -1,7 +1,7 @@
 #pragma once
 #include "EventDef.h"
 #include <deque>
-#include "../console/ConsoleTools.h"
+#include "console/ConsoleTools.h"
 
 using namespace std;
 using namespace Console;
