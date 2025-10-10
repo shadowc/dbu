@@ -253,7 +253,7 @@ string AbstractWidget::GetColorScheme()
     return colorScheme;
 }
 
-void AbstractWidget::OnEvent(Event event)
+void AbstractWidget::OnEvent(Event& event)
 {
     // Base implementation does nothing
 }

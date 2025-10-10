@@ -1,6 +1,7 @@
 #include "widget/Menu.h"
 #include "widget/MenuItem.h"
 #include "console/Console.h"
+#include "event/KeyCodes.h"
 #include <cmath>
 
 void Menu::SetHorizontal()
@@ -80,6 +81,21 @@ int Menu::GetSelectedItem()
     return -1;
 }
 
+void Menu::OnEvent(Event& event)
+{
+    if (event.Type != EventType::Keyboard) {
+        return;
+    }
+
+    event.Bubbling = false;
+
+    if (IsHorizontal()) {
+        HandleKeyPressedHorizontal(event);
+    } else {
+        HandleKeyPressedVertical(event);
+    }
+}
+
 void Menu::Invalidate()
 {
     AbstractWidget::Invalidate();
@@ -106,5 +122,109 @@ void Menu::RenderWidget()
 
     for (int y = coords.Y; y < coords.Y + size.Height; y++) {
         console->FillLine(y, coords.X, coords.X + size.Width, ' ');
+    }
+}
+
+void Menu::HandleKeyPressedHorizontal(Event& event)
+{
+    switch (event.KeyCode) {
+        case (KEY_LEFT):
+            {
+                int selectedIndex = GetSelectedItem();
+                int newIndex = selectedIndex - 1;
+
+                if (newIndex < 0) {
+                    newIndex = GetChildLength() - 1;
+                }
+
+                SetSelectedItem(newIndex);
+            }
+            break;
+
+        case (KEY_RIGHT):
+            {
+                int selectedIndex = GetSelectedItem();
+                int newIndex = selectedIndex + 1;
+
+                if (newIndex >= GetChildLength()) {
+                    newIndex = 0;
+                }
+
+                SetSelectedItem(newIndex);
+            }
+            break;
+
+        case (KEY_ENTER):
+        case (KEY_DOWN):
+            {
+                int selectedIndex = GetSelectedItem();
+
+                if (selectedIndex >= 0 && selectedIndex < GetChildLength()) {
+                    MenuItem* menuItem = dynamic_cast<MenuItem*>(GetChildAt(selectedIndex));
+
+                    if (menuItem != nullptr) {
+                        menuItem->Focus();
+                        menuItem->OnEvent(event);
+                    }
+                }
+            }
+            break;
+
+        case (KEY_ESC):
+        case (KEY_UP):
+            SetSelectedItem(-1);
+            Blur();
+            break;
+    }
+}
+
+void Menu::HandleKeyPressedVertical(Event& event)
+{
+    switch (event.KeyCode) {
+        case (KEY_UP):
+            {
+                int selectedIndex = GetSelectedItem();
+                int newIndex = selectedIndex - 1;
+
+                if (newIndex < 0) {
+                    newIndex = GetChildLength() - 1;
+                }
+
+                SetSelectedItem(newIndex);
+            }
+            break;
+
+        case (KEY_DOWN):
+            {
+                int selectedIndex = GetSelectedItem();
+                int newIndex = selectedIndex + 1;
+
+                if (newIndex >= GetChildLength()) {
+                    newIndex = 0;
+                }
+
+                SetSelectedItem(newIndex);
+            }
+            break;
+
+        case (KEY_ENTER):
+            {
+                int selectedIndex = GetSelectedItem();
+
+                if (selectedIndex >= 0 && selectedIndex < GetChildLength()) {
+                    MenuItem* menuItem = dynamic_cast<MenuItem*>(GetChildAt(selectedIndex));
+
+                    if (menuItem != nullptr) {
+                        menuItem->Focus();
+                        menuItem->OnEvent(event);
+                    }
+                }
+            }
+            break;
+
+        case (KEY_ESC):
+            SetSelectedItem(-1);
+            Blur();
+            break;
     }
 }

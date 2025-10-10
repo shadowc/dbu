@@ -43,7 +43,7 @@ public:
     void Focus();
     void Blur();
 
-    virtual void OnEvent(Event event);
+    virtual void OnEvent(Event& event);
 
 protected:
     unsigned int uniqueId;

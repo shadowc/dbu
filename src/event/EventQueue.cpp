@@ -106,7 +106,11 @@ void EventQueue::ProcessNextEvent(AbstractWidget* root)
     if (currentFocusedWidget != nullptr) {
         currentFocusedWidget->OnEvent(event);
 
-        if (event.Bubbling) {
+        if (currentFocusedWidget == nullptr) {
+            root->Focus(); // refocus on root if the focused widget was blurred during event processing
+        }
+
+        if (event.Bubbling && currentFocusedWidget != nullptr) {
             AbstractWidget* parent = currentFocusedWidget->GetParent();
 
             while (parent != nullptr && event.Bubbling) {

@@ -17,9 +17,14 @@ public:
     void SetSelectedItem(int index);
     int GetSelectedItem();
 
+    void OnEvent(Event& event) override;
+
 protected:
     void Invalidate() override;
     void RenderWidget() override;
+
+    void HandleKeyPressedHorizontal(Event& event);
+    void HandleKeyPressedVertical(Event& event);
 
     bool horizontal = true;
     int topPadding = 1;

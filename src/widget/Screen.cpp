@@ -72,7 +72,7 @@ bool Screen::HasActiveMask()
     return false;
 }
 
-void Screen::OnEvent(Event event)
+void Screen::OnEvent(Event& event)
 {
     switch (event.Type) {
         case (EventType::Keyboard):

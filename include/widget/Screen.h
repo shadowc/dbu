@@ -13,7 +13,7 @@ public:
     void OnResize() override;
     void SetLastCharPressed(int keyCode);
     bool HasActiveMask() override;
-    void OnEvent(Event event) override;
+    void OnEvent(Event& event) override;
 
 protected:
     void RenderWidget() override;
