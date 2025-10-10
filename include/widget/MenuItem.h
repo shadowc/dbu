@@ -2,6 +2,7 @@
 
 #include "AbstractWidget.h"
 #include <string>
+#include <functional>
 
 using namespace std;
 
@@ -12,10 +13,13 @@ public:
     string GetLabel() const;
     bool IsSelected() const;
     void SetSelected(bool isSelected);
+    void Execute();
+    void SetAction(function<void()> func);
 
 protected:
     string label;
     bool selected;
+    function<void()> action;
 
     void RenderWidget() override;
     void Invalidate() override;

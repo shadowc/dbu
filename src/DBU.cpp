@@ -69,6 +69,10 @@ void BuildUI(Screen* screen)
 
     MenuItem* exitMenuItem = new MenuItem();
     exitMenuItem->SetLabel(" Exit ");
+    exitMenuItem->SetAction([]() {
+        EventQueue::GetInstance()->Exit();
+    });
+
     mainMenu->AddChild(exitMenuItem);
 
     screen->AddChild(mainMenu);

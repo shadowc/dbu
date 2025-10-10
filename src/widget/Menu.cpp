@@ -164,7 +164,7 @@ void Menu::HandleKeyPressedHorizontal(Event& event)
 
                     if (menuItem != nullptr) {
                         menuItem->Focus();
-                        menuItem->OnEvent(event);
+                        menuItem->Execute();
                     }
                 }
             }
@@ -216,7 +216,7 @@ void Menu::HandleKeyPressedVertical(Event& event)
 
                     if (menuItem != nullptr) {
                         menuItem->Focus();
-                        menuItem->OnEvent(event);
+                        menuItem->Execute();
                     }
                 }
             }

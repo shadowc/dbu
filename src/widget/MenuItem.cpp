@@ -28,6 +28,18 @@ void MenuItem::SetSelected(bool isSelected)
     Invalidate();
 }
 
+void MenuItem::Execute()
+{
+    if (action) {
+        action();
+    }
+}
+
+void MenuItem::SetAction(function<void()> func)
+{
+    action = func;
+}
+
 void MenuItem::RenderWidget()
 {
     ConsoleTty* console = ConsoleTty::getTty();
