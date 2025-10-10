@@ -22,7 +22,7 @@
 using namespace Console;
 using namespace std;
 
-Dialog* BuildUI(Screen* screen);
+void BuildUI(Screen* screen);
 
 int main()
 {
@@ -35,7 +35,7 @@ int main()
 
     // Create screen UI
     Screen* screen = new Screen();
-    Dialog* dialog = BuildUI(screen);
+    BuildUI(screen);
 
     screen->Invalidate();
     screen->Draw();
@@ -56,12 +56,6 @@ int main()
                         case (KEY_ESC):
                             exiting = true;
                             break;
-                        case (KEY_UP):
-                            dialog->SetVisible(true);
-                            break;
-                        case (KEY_DOWN):
-                            dialog->SetVisible(false);
-                            break;    
                     }
 
                     screen->SetLastCharPressed(event.KeyCode);
@@ -94,14 +88,8 @@ int main()
     return 0;
 }
 
-Dialog* BuildUI(Screen* screen)
+void BuildUI(Screen* screen)
 {
-    Dialog* connectionDialog = new Dialog();
-    connectionDialog->SetTitle(" MySQL Connection ");
-    connectionDialog->SetVisible(true);
-
-    screen->AddChild(connectionDialog);
-
     Menu* mainMenu = new Menu();
 
     MenuItem* connectionMenuItem = new MenuItem();
@@ -113,6 +101,4 @@ Dialog* BuildUI(Screen* screen)
     mainMenu->AddChild(exitMenuItem);
 
     screen->AddChild(mainMenu);
-
-    return connectionDialog;
 }
