@@ -62,3 +62,8 @@ void Screen::RenderWidget()
         console->FillLine(y, coords.X, size.Width, ' ');
     }
 }
+
+bool Screen::HasActiveMask()
+{
+    return false;
+}

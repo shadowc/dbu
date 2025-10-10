@@ -27,12 +27,19 @@ AbstractWidget::~AbstractWidget() {
 
 void AbstractWidget::Draw() {
     if (invalidated) {
+        for (AbstractWidget* child : children) {
+            if (child->HasActiveMask()) {
+                ConsoleTty::getTty()->AddMask(child->GetActiveMask());
+            }
+        }
+
         RenderWidget();
+        ConsoleTty::getTty()->clearMasks();
 
         for (AbstractWidget* child : children) {
             child->Draw();
         }
-
+        
         invalidated = false;
     }
 
@@ -193,4 +200,14 @@ void AbstractWidget::RemoveChildAt(int position)
     children.erase(it + position);
 
     Invalidate();
+}
+
+bool AbstractWidget::HasActiveMask()
+{
+    return true;
+}
+
+Mask AbstractWidget::GetActiveMask()
+{
+    return Mask(coords.X, coords.Y, size.Width, size.Height);
 }

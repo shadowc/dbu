@@ -32,6 +32,21 @@ namespace Console {
         int Height;
     };
 
+    struct Mask {
+        Mask() {
+            Position = Coords(0, 0);
+            Dimentions = Size(0, 0);
+        }
+
+        Mask(int x, int y, int w, int h) {
+            Position = Coords(x, y);
+            Dimentions = Size(w, h);
+        }
+
+        Coords Position;
+        Size Dimentions;
+    };
+
     #ifdef __WIN32
         #define _getConsoleSize __getConsoleSize_W
         #define _initConsoleInputMode __initConsoleInputMode_W

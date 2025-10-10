@@ -30,6 +30,9 @@ public:
     int GetChildLength();
     AbstractWidget* GetChildAt(int index);
 
+    virtual bool HasActiveMask();
+    Mask GetActiveMask();
+
     unsigned int GetUniqueId();
 protected:
     unsigned int uniqueId;

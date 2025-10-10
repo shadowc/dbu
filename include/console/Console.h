@@ -3,6 +3,7 @@
 #include "ColorSchemeManager.h"
 #include "ColorStyle.h"
 #include "ConsoleTools.h"
+#include <vector>
 
 namespace Console {
     class ConsoleTty {
@@ -35,6 +36,10 @@ namespace Console {
         void setPos(int col, int row);
         Size getConsoleSize();
 
+        void AddMask(Mask mask);
+        void clearMasks();
+        bool isMasked(int x, int y);
+
         void Flush();
 
         void shutdown();
@@ -42,5 +47,6 @@ namespace Console {
     private:
         static ConsoleTty* instance;
         bool cursorVisible;
+        vector<Mask> masks;
     };
 }

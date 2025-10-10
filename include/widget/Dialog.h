@@ -10,6 +10,7 @@ public:
 
     void SetVisible(bool newVisible);
     void SetTitle(string newTitle);
+    bool HasActiveMask() override;
 
 protected:
     void RenderWidget() override;

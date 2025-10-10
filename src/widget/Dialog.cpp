@@ -20,6 +20,10 @@ void Dialog::SetVisible(bool newVisible)
     if (newVisible != visible) {
         visible = newVisible;
         Invalidate();
+
+        if (!visible && parent != nullptr) {
+            parent->Invalidate();
+        }
     }
 }
 
@@ -34,6 +38,10 @@ void Dialog::RenderWidget()
     AbstractWidget* screen = parent;
 
     if (parent == nullptr) {
+        return;
+    }
+
+    if (!visible) {
         return;
     }
 
@@ -54,4 +62,9 @@ void Dialog::RenderWidget()
 
     // Center title
     console->CenterString(coords.Y, coords.X, coords.X + size.Width, title);
+}
+
+bool Dialog::HasActiveMask()
+{
+    return visible;
 }

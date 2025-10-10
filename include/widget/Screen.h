@@ -9,6 +9,7 @@ public:
     Screen();
     void OnResize() override;
     void SetLastCharPressed(char keyCode);
+    bool HasActiveMask() override;
 
 protected:
     void RenderWidget() override;

@@ -92,7 +92,9 @@ namespace Console {
     {
         setPos(from, y);
         for (int i = from; i <= to; i++) {
-            printf("%s", c);
+            if (!isMasked(i, y)) {
+                cout << c;
+            }
         }
     }
 
@@ -100,7 +102,9 @@ namespace Console {
     {
         setPos(from, y);
         for (int i = from; i <= to; i++) {
-            cout << c;
+            if (!isMasked(i, y)) {
+                cout << c;
+            }
         }
     }
 
@@ -108,31 +112,51 @@ namespace Console {
     {
         int width = to - from;
     
-        setPos(from + (int)(floor((float)width / 2.0f) - floor((float)str.length() / 2)), y);
-        cout << str;
+        int strFrom = from + (int)(floor((float)width / 2.0f) - floor((float)str.length() / 2));
+        int strTo = strFrom + (int)str.length() - 1;
+
+        setPos(strFrom, y);
+
+        for (int i = strFrom, n = 0; i < strTo; i++, n++) {
+            if (!isMasked(i, y)) {
+                cout << str[n];
+            }
+        }
     }
 
     void ConsoleTty::DrawBox(int x, int y, int width, int height)
     {
         // Build top
         setPos(x, y);
-        printf("┌");
+        if (!isMasked(x, y)) {
+            printf("┌");
+        }
         FillLine(y, x + 1, x + width - 1, "─");
-        printf("┐");
+        if (!isMasked(x + width - 1, y)) {
+            printf("┐");
+        }
 
         // fill dialog
         for (int i = y + 1; i < y + height; i++) {
             setPos(x, i);
-            printf("│");
+            if (!isMasked(x, i)) {
+                printf("│");
+            }
             FillLine(i, x + 1, x + width - 1, ' ');
-            printf("│");
+            if (!isMasked(x + width - 1, i)) {
+                printf("│");
+            }
         }
 
         // Build bottom
         setPos(x, y + height);
-        printf("└");
+        if (!isMasked(x, y + height)) {
+            printf("└");
+        }
         FillLine(y + height, x + 1, x + width - 1, "─");
-        printf("┘");
+        if (!isMasked(x + width - 1, y + height)) {
+            printf("┘");
+        }
     }
 
     void ConsoleTty::clearScreen()
@@ -148,6 +172,28 @@ namespace Console {
     Size ConsoleTty::getConsoleSize()
     {
         return _getConsoleSize();
+    }
+
+    void ConsoleTty::AddMask(Mask mask)
+    {
+        masks.push_back(mask);
+    }
+
+    void ConsoleTty::clearMasks()
+    {
+        masks.clear();
+    }
+
+    bool ConsoleTty::isMasked(int x, int y)
+    {
+        for (Mask mask : masks) {
+            if (x >= mask.Position.X && x < (mask.Position.X + mask.Dimentions.Width) &&
+                y >= mask.Position.Y && y < (mask.Position.Y + mask.Dimentions.Height)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     void ConsoleTty::Flush()

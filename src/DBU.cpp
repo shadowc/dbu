@@ -4,6 +4,7 @@
 #include "DBU.h"
 #include "event/EventQueue.h"
 #include "event/EventDef.h"
+#include "event/KeyCodes.h"
 #include "console/Console.h"
 #include "console/ConsoleTools.h"
 #include "console/Color.h"
@@ -19,7 +20,7 @@
 using namespace Console;
 using namespace std;
 
-void BuildUI(Screen* screen);
+Dialog* BuildUI(Screen* screen);
 
 int main()
 {
@@ -32,8 +33,7 @@ int main()
 
     // Create screen UI
     Screen* screen = new Screen();
-
-    BuildUI(screen);
+    Dialog* dialog = BuildUI(screen);
 
     screen->Invalidate();
     screen->Draw();
@@ -48,9 +48,16 @@ int main()
 
             switch (event.Type) {
                 case (EventType::Keyboard):
-                    if (event.KeyCode == 27) {
-                        exiting = true;
-                        break;
+                    switch (event.KeyCode) {
+                        case (KEY_ESC):
+                            exiting = true;
+                            break;
+                        case (KEY_UP):
+                            dialog->SetVisible(true);
+                            break;
+                        case (KEY_DOWN):
+                            dialog->SetVisible(false);
+                            break;    
                     }
 
                     screen->SetLastCharPressed(event.KeyCode);
@@ -83,11 +90,13 @@ int main()
     return 0;
 }
 
-void BuildUI(Screen* screen)
+Dialog* BuildUI(Screen* screen)
 {
     Dialog* connectionDialog = new Dialog();
     connectionDialog->SetTitle(" MySQL Connection ");
     connectionDialog->SetVisible(true);
 
     screen->AddChild(connectionDialog);
+
+    return connectionDialog;
 }
