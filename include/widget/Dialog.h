@@ -12,6 +12,7 @@ public:
     void SetTitle(string newTitle);
     bool HasActiveMask() override;
     void Invalidate() override;
+    void SetParent(AbstractWidget* widget) override;
 
 protected:
     void RenderWidget() override;

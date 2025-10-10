@@ -19,6 +19,7 @@ AbstractWidget::AbstractWidget() {
     invalidated = true;
     children = vector<AbstractWidget*>();
     parent = nullptr;
+    colorScheme = "default";
 }
 
 AbstractWidget::~AbstractWidget() {
@@ -35,6 +36,7 @@ void AbstractWidget::Draw() {
             }
         }
 
+        console->colorSchemeManager->setColorScheme(GetColorScheme());
         RenderWidget();
         console->clearMasks();
 
@@ -145,6 +147,7 @@ void AbstractWidget::SetParent(AbstractWidget* newParent)
     }
 
     parent = newParent;
+    colorScheme = parent->GetColorScheme();
 
     // Add to new parent if we aren't added yet
     if (parent != nullptr) {
@@ -212,4 +215,20 @@ bool AbstractWidget::HasActiveMask()
 Mask AbstractWidget::GetActiveMask()
 {
     return Mask(coords.X, coords.Y, size.Width, size.Height);
+}
+
+void AbstractWidget::SetColorScheme(string newColorScheme)
+{
+    colorScheme = newColorScheme;
+
+    for (AbstractWidget* child : children) {
+        child->SetColorScheme(newColorScheme);
+    }
+
+    invalidated = true;
+}
+
+string AbstractWidget::GetColorScheme()
+{
+    return colorScheme;
 }

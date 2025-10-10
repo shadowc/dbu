@@ -21,6 +21,17 @@ namespace Console {
         ColorSchemes = map<string, ColorScheme>();
         SelectedScheme = scheme;
 
+        ColorScheme dialog = ColorScheme(
+            ColorStyle(ForegroundColors::BLACK, BackgroundColors::WHITE), // paragraph
+            ColorStyle(ForegroundColors::BLUE, BackgroundColors::WHITE), // Highlight
+            ColorStyle(ForegroundColors::MAGENTA, BackgroundColors::WHITE), // Heading
+            ColorStyle(ForegroundColors::BLACK, BackgroundColors::CYAN), // Title bar
+            ColorStyle(ForegroundColors::BRIGHT_WHITE, BackgroundColors::BLUE), // Button Primary
+            ColorStyle(ForegroundColors::BRIGHT_WHITE, BackgroundColors::GREY), // Button Secondary
+            ColorStyle(ForegroundColors::BRIGHT_WHITE, BackgroundColors::RED) // Button Danger
+        );
+
+        addColorScheme(string("dialog"), dialog);
         addColorScheme(string("default"), scheme);
     }
 

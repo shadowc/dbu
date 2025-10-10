@@ -13,6 +13,7 @@ Dialog::Dialog()
     visible = false;
     size.Width = 60;
     size.Height = 15;
+    colorScheme = "dialog";
 }
 
 void Dialog::SetVisible(bool newVisible)
@@ -43,7 +44,7 @@ void Dialog::RenderWidget()
     ColorScheme scheme = console->getColorScheme();
 
     // paint background
-    console->setColor(scheme.TitleBar);
+    console->setColor(scheme.Paragraph);
 
     console->DrawBox(coords.X, coords.Y, size.Width, size.Height);
 
@@ -54,6 +55,12 @@ void Dialog::RenderWidget()
 bool Dialog::HasActiveMask()
 {
     return visible;
+}
+
+void Dialog::SetParent(AbstractWidget* widget)
+{
+    AbstractWidget::SetParent(widget);
+    colorScheme = "dialog";
 }
 
 void Dialog::Invalidate()

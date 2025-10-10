@@ -1,6 +1,7 @@
 #pragma once
 #include "../console/ConsoleTools.h"
 #include <vector>
+#include <string>
 
 using namespace Console;
 using namespace std;
@@ -22,7 +23,7 @@ public:
     virtual void OnResize();
 
     AbstractWidget* GetParent();
-    void SetParent(AbstractWidget*);
+    virtual void SetParent(AbstractWidget*);
     void RemoveParent();
     void AddChild(AbstractWidget* child);
     void RemoveChild(AbstractWidget* child);
@@ -33,6 +34,8 @@ public:
     virtual bool HasActiveMask();
     Mask GetActiveMask();
 
+    string GetColorScheme();
+
     unsigned int GetUniqueId();
 protected:
     unsigned int uniqueId;
@@ -41,6 +44,9 @@ protected:
     Size size;
     vector<AbstractWidget*> children;
     AbstractWidget* parent;
+    string colorScheme;
+
+    void SetColorScheme(string newColorScheme);
 
     virtual void RenderWidget();
     virtual void TearDown();
