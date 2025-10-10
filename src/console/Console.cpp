@@ -90,9 +90,9 @@ namespace Console {
 
     void ConsoleTty::FillLine(int y, int from, int to, const char* c)
     {
-        setPos(from, y);
         for (int i = from; i <= to; i++) {
             if (!isMasked(i, y)) {
+                setPos(i, y);
                 cout << c;
             }
         }
@@ -115,10 +115,9 @@ namespace Console {
         int strFrom = from + (int)(floor((float)width / 2.0f) - floor((float)str.length() / 2));
         int strTo = strFrom + (int)str.length() - 1;
 
-        setPos(strFrom, y);
-
         for (int i = strFrom, n = 0; i < strTo; i++, n++) {
             if (!isMasked(i, y)) {
+                setPos(i, y);
                 cout << str[n];
             }
         }
@@ -127,34 +126,43 @@ namespace Console {
     void ConsoleTty::DrawBox(int x, int y, int width, int height)
     {
         // Build top
-        setPos(x, y);
         if (!isMasked(x, y)) {
+            setPos(x, y);
             printf("┌");
         }
+
         FillLine(y, x + 1, x + width - 1, "─");
-        if (!isMasked(x + width - 1, y)) {
+
+        if (!isMasked(x + width, y)) {
+            setPos(x + width, y);
             printf("┐");
         }
 
         // fill dialog
         for (int i = y + 1; i < y + height; i++) {
-            setPos(x, i);
             if (!isMasked(x, i)) {
+                setPos(x, i);
                 printf("│");
             }
+
             FillLine(i, x + 1, x + width - 1, ' ');
-            if (!isMasked(x + width - 1, i)) {
+
+            if (!isMasked(x + width, i)) {
+                setPos(x + width, i);
                 printf("│");
             }
         }
 
         // Build bottom
-        setPos(x, y + height);
         if (!isMasked(x, y + height)) {
+            setPos(x, y + height);
             printf("└");
         }
+
         FillLine(y + height, x + 1, x + width - 1, "─");
-        if (!isMasked(x + width - 1, y + height)) {
+
+        if (!isMasked(x + width, y + height)) {
+            setPos(x + width, y + height);
             printf("┘");
         }
     }
