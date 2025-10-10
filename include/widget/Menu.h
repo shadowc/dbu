@@ -14,6 +14,9 @@ public:
     void SetTopPadding(int padding);
     void SetSidePadding(int padding);
 
+    void SetSelectedItem(int index);
+    int GetSelectedItem() const;
+
 protected:
     void Invalidate() override;
     void RenderWidget() override;

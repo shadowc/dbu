@@ -40,12 +40,12 @@ void AbstractWidget::Draw() {
         console->colorSchemeManager->setColorScheme(GetColorScheme());
         RenderWidget();
         console->clearMasks();
-
-        for (AbstractWidget* child : children) {
-            child->Draw();
-        }
         
         invalidated = false;
+    }
+
+    for (AbstractWidget* child : children) {
+        child->Draw();
     }
 
     // Flush the console output if this is the top-level widget

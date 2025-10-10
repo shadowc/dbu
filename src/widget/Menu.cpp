@@ -1,4 +1,5 @@
 #include "widget/Menu.h"
+#include "widget/MenuItem.h"
 #include "console/Console.h"
 #include <cmath>
 
@@ -42,6 +43,40 @@ void Menu::SetSidePadding(int padding)
         sidePadding = padding;
         Invalidate();
     }
+}
+
+void Menu::SetSelectedItem(int index)
+{
+    for (size_t i = 0; i < children.size(); ++i) {
+        MenuItem* otherMenuItem = dynamic_cast<MenuItem*>(children[i]);
+
+        if (otherMenuItem != nullptr && otherMenuItem->IsSelected()) {
+            otherMenuItem->SetSelected(false);
+        }
+    }
+
+    if (index < 0 || index >= static_cast<int>(children.size())) {
+        return;
+    }
+
+    MenuItem* menuItem = dynamic_cast<MenuItem*>(children[index]);
+
+    if (menuItem != nullptr) {
+        menuItem->SetSelected(true);
+    }
+}
+
+int Menu::GetSelectedItem() const
+{
+    for (size_t i = 0; i < children.size(); ++i) {
+        MenuItem* menuItem = dynamic_cast<MenuItem*>(children[i]);
+        if (menuItem != nullptr && menuItem->IsSelected()) {
+            return i;
+        }
+    }
+
+    // No item selected
+    return -1;
 }
 
 void Menu::Invalidate()

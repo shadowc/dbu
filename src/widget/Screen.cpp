@@ -1,5 +1,6 @@
 #include "platform.h"
 #include "widget/Screen.h"
+#include "widget/Menu.h"
 #include "console/Console.h"
 #include "console/ConsoleTools.h"
 #include "event/EventQueue.h"
@@ -34,7 +35,7 @@ void Screen::OnResize()
     Invalidate();
 }
 
-void Screen::SetLastCharPressed(char keyCode)
+void Screen::SetLastCharPressed(int keyCode)
 {
     lastKeyCode = keyCode;
     Invalidate();
@@ -75,13 +76,23 @@ void Screen::OnEvent(Event event)
 {
     switch (event.Type) {
         case (EventType::Keyboard):
+            SetLastCharPressed(event.KeyCode);
+
             switch (event.KeyCode) {
                 case (KEY_ESC):
                     EventQueue::GetInstance()->Exit();
                     break;
-            }
 
-            SetLastCharPressed(event.KeyCode);
+                case (KEY_F9):
+                    Menu* menu = FindMenu();
+
+                    if (menu != nullptr) {
+                        menu->SetSelectedItem(0);
+                        menu->Focus();
+                    }
+
+                    break;
+            }
 
             break;
 
@@ -90,4 +101,17 @@ void Screen::OnEvent(Event event)
             OnResize();
             break;
     }
+}
+
+Menu* Screen::FindMenu() const
+{
+    for (size_t i = 0; i < children.size(); ++i) {
+        Menu* menu = dynamic_cast<Menu*>(children[i]);
+
+        if (menu != nullptr) {
+            return menu;
+        }
+    }
+
+    return nullptr;
 }
