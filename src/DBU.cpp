@@ -41,6 +41,8 @@ int main()
     // Event loop
     bool exiting = false;
     while (!exiting) {
+        // We need to pass screen here to perform the first draw because ncurses clears the
+        // screen the first time we poll for input
         eventQueue->Loop(screen);
 
         while (eventQueue->UnprocessedEvents()) {

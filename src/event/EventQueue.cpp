@@ -42,11 +42,13 @@ void EventQueue::Loop(AbstractWidget* root)
     // Poll Keyboard Events
     int lastChar = _getKeyboardInput();
 
+#ifdef __LINUX
     if (firstPoll) {
         root->Invalidate();
         root->Draw();
         firstPoll = false;
     }
+#endif
 
     if (lastChar != 0) {
         Event event = Event();
