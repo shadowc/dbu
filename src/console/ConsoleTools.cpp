@@ -58,6 +58,7 @@ namespace Console {
         noecho();
         nodelay(stdscr, TRUE);
         scrollok(stdscr, TRUE);
+        keypad(stdscr, TRUE);
     }
 
     void __cleanupConsoleInputMode_L()
