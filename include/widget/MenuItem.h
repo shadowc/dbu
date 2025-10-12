@@ -1,5 +1,4 @@
 #pragma once
-
 #include "AbstractWidget.h"
 #include <string>
 #include <functional>

@@ -13,5 +13,7 @@ MenuConfig::MenuConfig()
     connectionsEntry.AddEntry(MenuEntry("Manage Connections..."));
 
     entries.push_back(connectionsEntry);
-    entries.push_back(MenuEntry("Exit", new ExitAction()));
+    ExitAction* exitAction = new ExitAction();
+
+    entries.push_back(MenuEntry("Exit", exitAction));
 }

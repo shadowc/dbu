@@ -1,4 +1,5 @@
 #include <platform.h>
+
 #include "console/ConsoleTools.h"
 #include <stdio.h>
 

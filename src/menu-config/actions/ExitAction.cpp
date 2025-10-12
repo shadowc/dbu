@@ -1,6 +1,6 @@
 #include "menu-config/actions/ExitAction.h"
-#include "event/EventQueue.h"
 #include "Application.h"
+#include "event/EventQueue.h"
 
 void ExitAction::Execute()
 {

@@ -4,6 +4,7 @@
 #include "console/ConsoleTools.h"
 #include "event/KeyboardTools.h"
 #include "widget/AbstractWidget.h"
+#include "widget/Screen.h"
 #include <deque>
 
 using namespace std;
@@ -26,8 +27,9 @@ bool EventQueue::UnprocessedEvents()
     return !queue.empty();
 }
 
-void EventQueue::Loop(AbstractWidget* root)
+void EventQueue::Loop()
 {
+    Screen* root = Application::GetScreen();
     // TODO: Poll mouse events
 
     // Poll Keyboard Events
@@ -85,8 +87,9 @@ Size EventQueue::GetScreenSize()
     return lastScreenSize;
 }
 
-void EventQueue::ProcessNextEvent(AbstractWidget* root)
+void EventQueue::ProcessNextEvent()
 {
+    Screen* root = Application::GetScreen();
     Event event = GetNextUnprocessedEvent();
 
     // focus on the root widget if no widget has focus

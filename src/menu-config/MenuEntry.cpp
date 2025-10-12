@@ -12,7 +12,7 @@ MenuEntry::MenuEntry(string label, AbstractAction* action)
 
 MenuEntry::~MenuEntry()
 {
-    if (action) {
+    if (action != nullptr) {
         delete action;
         action = nullptr;
     }

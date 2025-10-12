@@ -1,5 +1,4 @@
 #pragma once
-
 #include "AbstractWidget.h"
 
 class Menu : public AbstractWidget

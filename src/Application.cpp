@@ -42,10 +42,10 @@ void Application::Run()
     while (!eventQueue->IsExiting()) {
         // We need to pass screen here to perform the first draw because ncurses clears the
         // screen the first time we poll for input
-        eventQueue->Loop(screen);
+        eventQueue->Loop();
 
         while (eventQueue->UnprocessedEvents()) {
-            eventQueue->ProcessNextEvent(screen);
+            eventQueue->ProcessNextEvent();
         }
 
         if (!eventQueue->IsExiting()) {

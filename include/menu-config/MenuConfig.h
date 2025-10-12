@@ -1,7 +1,6 @@
 #pragma once
-
-#include <vector>
 #include "MenuEntry.h"
+#include <vector>
 
 class MenuConfig
 {

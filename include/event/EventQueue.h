@@ -15,10 +15,10 @@ public:
     ~EventQueue();
 
     bool UnprocessedEvents();
-    void Loop(AbstractWidget* root);
+    void Loop();
     Event GetNextUnprocessedEvent();
     Size GetScreenSize();
-    void ProcessNextEvent(AbstractWidget* root);
+    void ProcessNextEvent();
 
     void SetCurrentFocusedWidget(AbstractWidget* widget);
 

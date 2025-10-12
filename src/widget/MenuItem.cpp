@@ -3,7 +3,6 @@
 #include "widget/MenuItem.h"
 #include "console/Console.h"
 #include <string>
-#include <stdexcept>
 #include <iostream>
 
 using namespace std;

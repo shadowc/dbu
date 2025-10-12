@@ -1,5 +1,4 @@
 #pragma once
-
 #include "AbstractAction.h"
 
 class ExitAction : public AbstractAction
