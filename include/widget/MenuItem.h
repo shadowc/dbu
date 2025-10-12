@@ -13,7 +13,7 @@ public:
     bool IsSelected() const;
     void SetSelected(bool isSelected);
     void Execute();
-    void SetAction(function<void()> func);
+    void SetAction(function<void()> action);
 
 protected:
     string label;

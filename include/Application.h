@@ -5,6 +5,7 @@ using namespace Console;
 
 class EventQueue;
 class Screen;
+class MenuConfig;
 
 class Application
 {
@@ -21,6 +22,5 @@ private:
     static EventQueue* eventQueue;
     static ConsoleTty* console;
     static Screen* screen;
-
-    static void BuildUI();
+    static MenuConfig* menuConfig;
 };

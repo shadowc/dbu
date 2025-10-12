@@ -4,6 +4,7 @@
 #include "console/Console.h"
 #include <string>
 #include <iostream>
+#include <functional>
 
 using namespace std;
 using namespace Console;
@@ -37,9 +38,9 @@ void MenuItem::Execute()
     }
 }
 
-void MenuItem::SetAction(function<void()> func)
+void MenuItem::SetAction(function<void()> action)
 {
-    action = func;
+    this->action = action;
 }
 
 void MenuItem::RenderWidget()

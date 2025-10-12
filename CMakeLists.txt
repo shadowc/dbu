@@ -54,7 +54,7 @@ set(
     "src/widget/MenuItem.cpp"
     "src/menu-config/MenuConfig.cpp"
     "src/menu-config/MenuEntry.cpp"
-    "src/menu-config/actions/ExitAction.cpp"
+    "src/menu-config/MenuActions.cpp"
 )
 
 # Add source to this project's executable.

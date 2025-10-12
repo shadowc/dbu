@@ -1,19 +1,18 @@
 #pragma once
 #include <vector>
 #include <string>
+#include <functional>
 
 using namespace std;
-class AbstractAction;
 
 class MenuEntry
 {
 public:
-    MenuEntry(string label, AbstractAction* action = nullptr);
-    ~MenuEntry();
+    MenuEntry(string label, function<void()> action = nullptr);
 
     void AddEntry(const MenuEntry& entry);
 
     string label;
-    AbstractAction *action = nullptr;
+    function<void()> action = nullptr;
     vector<MenuEntry> subEntries;
 };

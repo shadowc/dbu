@@ -1,21 +1,13 @@
 #include "menu-config/MenuEntry.h"
-#include "menu-config/actions/AbstractAction.h"
 #include <string>
+#include <functional>
 
 using namespace std;
 
-MenuEntry::MenuEntry(string label, AbstractAction* action)
+MenuEntry::MenuEntry(string label, function<void()> action)
 {
     this->label = label;
     this->action = action;
-}
-
-MenuEntry::~MenuEntry()
-{
-    if (action != nullptr) {
-        delete action;
-        action = nullptr;
-    }
 }
 
 void MenuEntry::AddEntry(const MenuEntry& entry)

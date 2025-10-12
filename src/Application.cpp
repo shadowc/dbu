@@ -2,8 +2,7 @@
 #include "event/EventQueue.h"
 #include "console/Console.h"
 #include "widget/Screen.h"
-#include "widget/Menu.h"
-#include "widget/MenuItem.h"
+#include "menu-config/MenuConfig.h"
 #include <thread>
 #include <chrono>
 
@@ -12,6 +11,7 @@ using namespace Console;
 EventQueue* Application::eventQueue = nullptr;
 ConsoleTty* Application::console = nullptr;
 Screen* Application::screen = nullptr;
+MenuConfig* Application::menuConfig = nullptr;
 
 void Application::Initialize()
 {
@@ -27,11 +27,14 @@ void Application::Initialize()
         screen = new Screen();
     }
 
+    if (menuConfig == nullptr) {
+        menuConfig = new MenuConfig();
+    }
+
     console->clearScreen();
     console->hideCursor();
 
-    BuildUI();
-
+    menuConfig->RenderMenu();
     screen->Invalidate();
     screen->Draw();
 }
@@ -77,6 +80,11 @@ void Application::Shutdown()
         delete eventQueue;
         eventQueue = nullptr;
     }
+
+    if (menuConfig != nullptr) {
+        delete menuConfig;
+        menuConfig = nullptr;
+    }
 }
 
 EventQueue* Application::GetEventQueue()
@@ -92,38 +100,4 @@ ConsoleTty* Application::GetConsole()
 Screen* Application::GetScreen()
 {
     return screen;
-}
-
-void Application::BuildUI()
-{
-    Menu* connectionsMenu = new Menu();
-    connectionsMenu->SetVertical();
-
-    MenuItem* connectMenuItem = new MenuItem();
-    connectMenuItem->SetLabel(" Connect to server... ");
-    connectionsMenu->AddChild(connectMenuItem);
-
-    MenuItem* manageConnectionsMenuItem = new MenuItem();
-    manageConnectionsMenuItem->SetLabel(" Manage connections... ");
-    connectionsMenu->AddChild(manageConnectionsMenuItem);
-
-    Menu* mainMenu = new Menu();
-
-    MenuItem* connectionMenuItem = new MenuItem();
-    connectionMenuItem->SetLabel(" Connections ");
-    connectionMenuItem->SetAction([connectionsMenu]() {
-        Application::GetScreen()->AddChild(connectionsMenu);
-    });
-
-    mainMenu->AddChild(connectionMenuItem);
-
-    MenuItem* exitMenuItem = new MenuItem();
-    exitMenuItem->SetLabel(" Exit ");
-    exitMenuItem->SetAction([]() {
-        Application::GetEventQueue()->Exit();
-    });
-
-    mainMenu->AddChild(exitMenuItem);
-
-    screen->AddChild(mainMenu);
 }
