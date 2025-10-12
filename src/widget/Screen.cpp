@@ -22,6 +22,7 @@ Screen::Screen()
     platformName = __PLATFORM;
     versionMajor = to_string(APP_VERSION_MAJOR);
     versionMinor = to_string(APP_VERSION_MINOR);
+    menuConfig = MenuConfig();
     OnResize();
 }
 
