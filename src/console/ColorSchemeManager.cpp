@@ -17,7 +17,7 @@ namespace Console {
             ColorStyle(ForegroundColors::BRIGHT_WHITE, BackgroundColors::GREY), // Button Secondary
             ColorStyle(ForegroundColors::BRIGHT_WHITE, BackgroundColors::RED), // Button Danger
             ColorStyle(ForegroundColors::WHITE, BackgroundColors::GREY), // Menu
-            ColorStyle(ForegroundColors::BRIGHT_WHITE, BackgroundColors::BLUE) // Menu Selected
+            ColorStyle(ForegroundColors::BRIGHT_WHITE, BackgroundColors::CYAN) // Menu Selected
         );
         
         ColorSchemes = map<string, ColorScheme>();

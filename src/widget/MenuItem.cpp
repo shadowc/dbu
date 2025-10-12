@@ -3,6 +3,7 @@
 #include "console/Console.h"
 #include <string>
 #include <stdexcept>
+#include <iostream>
 
 using namespace std;
 
@@ -47,7 +48,8 @@ void MenuItem::RenderWidget()
 
     console->setColor(selected ? scheme.MenuSelected : scheme.Menu);
     console->FillLine(coords.Y, coords.X, coords.X + size.Width, ' ');
-    console->CenterString(coords.Y, coords.X, coords.X + size.Width, label);
+    console->setPos(coords.X, coords.Y);
+    cout << label;
 }
 
 void MenuItem::Invalidate()
@@ -59,7 +61,7 @@ void MenuItem::Invalidate()
     if (menuParent == nullptr) {
         coords.X = 1;
         coords.Y = 1;
-        size.Width = label.length() + 2;
+        size.Width = label.length();
         size.Height = 1;
         return;
     }

@@ -61,10 +61,25 @@ int main()
 
 void BuildUI(Screen* screen)
 {
+    Menu* connectionsMenu = new Menu();
+    connectionsMenu->SetVertical();
+
+    MenuItem* connectMenuItem = new MenuItem();
+    connectMenuItem->SetLabel(" Connect to server... ");
+    connectionsMenu->AddChild(connectMenuItem);
+
+    MenuItem* manageConnectionsMenuItem = new MenuItem();
+    manageConnectionsMenuItem->SetLabel(" Manage connections... ");
+    connectionsMenu->AddChild(manageConnectionsMenuItem);
+
     Menu* mainMenu = new Menu();
 
     MenuItem* connectionMenuItem = new MenuItem();
     connectionMenuItem->SetLabel(" Connections ");
+    connectionMenuItem->SetAction([screen, connectionsMenu]() {
+        screen->AddChild(connectionsMenu);
+    });
+
     mainMenu->AddChild(connectionMenuItem);
 
     MenuItem* exitMenuItem = new MenuItem();

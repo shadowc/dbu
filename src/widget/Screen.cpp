@@ -56,7 +56,14 @@ void Screen::RenderWidget()
     // Draw status bar
     console->FillLine(size.Height, coords.X, size.Width, ' ');
     console->setPos(2, size.Height);
-    printf("Console size: %dx%d │", size.Width, size.Height);
+    console->setColor(ForegroundColors::CYAN);
+    printf("F9");
+    console->setColor(scheme.TitleBar);
+    printf(" Menu │ ");
+    console->setColor(ForegroundColors::CYAN);
+    printf("Esc");
+    console->setColor(scheme.TitleBar);
+    printf(" Exit");
 
     console->setPos(size.Width - 24, size.Height);
     printf("│ Last key pressed: %d ", lastKeyCode);
