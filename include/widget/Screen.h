@@ -2,7 +2,6 @@
 
 #include "AbstractWidget.h"
 #include "event/EventDef.h"
-#include "menu-config/MenuConfig.h"
 #include <string>
 
 class Menu;
@@ -22,7 +21,6 @@ protected:
     string platformName;
     string versionMajor;
     string versionMinor;
-    MenuConfig menuConfig;
 
     Menu* FindMenu();
 };

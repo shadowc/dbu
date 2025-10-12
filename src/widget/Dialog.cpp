@@ -1,4 +1,5 @@
 #include "widget/Dialog.h"
+#include "Application.h"
 #include "widget/AbstractWidget.h"
 #include "console/ConsoleTools.h"
 #include "console/Console.h"
@@ -40,7 +41,7 @@ void Dialog::RenderWidget()
         return;
     }
 
-    ConsoleTty* console = ConsoleTty::getTty();
+    ConsoleTty* console = Application::GetConsole();
     ColorScheme scheme = console->getColorScheme();
 
     // paint background

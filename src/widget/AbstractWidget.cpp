@@ -1,10 +1,12 @@
 #include "widget/AbstractWidget.h"
+#include "Application.h"
 #include "console/Console.h"
 #include "event/EventQueue.h"
 #include <vector>
 #include <iostream>
 
 using namespace std;
+using namespace Console;
 
 unsigned int AbstractWidget::nextElementId = 0;
 
@@ -28,7 +30,7 @@ AbstractWidget::~AbstractWidget() {
 }
 
 void AbstractWidget::Draw() {
-    ConsoleTty* console = ConsoleTty::getTty();
+    ConsoleTty* console = Application::GetConsole();
 
     if (invalidated) {
         for (AbstractWidget* child : children) {
@@ -134,14 +136,14 @@ void AbstractWidget::Focus()
 {
     hasFocus = true;
 
-    EventQueue::GetInstance()->SetCurrentFocusedWidget(this);
+    Application::GetEventQueue()->SetCurrentFocusedWidget(this);
 }
 
 void AbstractWidget::Blur()
 {
     hasFocus = false;
 
-    EventQueue::GetInstance()->SetCurrentFocusedWidget(nullptr);
+    Application::GetEventQueue()->SetCurrentFocusedWidget(nullptr);
 }
 
 int AbstractWidget::GetChildLength()

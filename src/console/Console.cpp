@@ -10,8 +10,6 @@
 using namespace std;
 
 namespace Console {
-    ConsoleTty* ConsoleTty::instance = nullptr;
-
     ConsoleTty::ConsoleTty()
     {
         colorSchemeManager = new ColorSchemeManager();
@@ -23,18 +21,11 @@ namespace Console {
         showCursor();
     }
 
-    void ConsoleTty::shutdown()
+    ConsoleTty::~ConsoleTty()
     {
         _cleanupConsoleInputMode();
-    }
-
-    ConsoleTty* ConsoleTty::getTty()
-    {
-        if (ConsoleTty::instance == nullptr) {
-            ConsoleTty::instance = new ConsoleTty();
-        }
-
-        return ConsoleTty::instance;
+        delete colorSchemeManager;
+        
     }
 
     ColorScheme ConsoleTty::getColorScheme()

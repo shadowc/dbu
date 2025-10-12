@@ -11,11 +11,12 @@ class AbstractWidget;
 class EventQueue 
 {
 public:
-    static EventQueue* GetInstance();
+    EventQueue();
+    ~EventQueue();
+
     bool UnprocessedEvents();
     void Loop(AbstractWidget* root);
     Event GetNextUnprocessedEvent();
-    void Shutdown();
     Size GetScreenSize();
     void ProcessNextEvent(AbstractWidget* root);
 
@@ -25,9 +26,6 @@ public:
     bool IsExiting();
 
 private:
-    EventQueue();
-
-    static EventQueue* instance;
     deque<Event> queue;
 
     void PushEvent(Event newEvent);

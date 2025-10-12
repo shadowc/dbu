@@ -1,5 +1,6 @@
 #include "platform.h"
 #include "widget/Screen.h"
+#include "Application.h"
 #include "widget/Menu.h"
 #include "console/Console.h"
 #include "console/ConsoleTools.h"
@@ -22,13 +23,12 @@ Screen::Screen()
     platformName = __PLATFORM;
     versionMajor = to_string(APP_VERSION_MAJOR);
     versionMinor = to_string(APP_VERSION_MINOR);
-    menuConfig = MenuConfig();
     OnResize();
 }
 
 void Screen::OnResize()
 {
-    Size screenSize = EventQueue::GetInstance()->GetScreenSize();
+    Size screenSize = Application::GetEventQueue()->GetScreenSize();
 
     size.Width = screenSize.Width;
     size.Height = screenSize.Height;
@@ -44,7 +44,7 @@ void Screen::SetLastCharPressed(int keyCode)
 
 void Screen::RenderWidget()
 {
-    ConsoleTty* console = ConsoleTty::getTty();
+    ConsoleTty* console = Application::GetConsole();
     ColorScheme scheme = console->getColorScheme();
 
     string titleStr = " DBU " + versionMajor + "." + versionMinor + " - " + platformName + " - No connection ";
@@ -88,7 +88,7 @@ void Screen::OnEvent(Event& event)
 
             switch (event.KeyCode) {
                 case (KEY_ESC):
-                    EventQueue::GetInstance()->Exit();
+                    Application::GetEventQueue()->Exit();
                     break;
 
                 case (KEY_F9):

@@ -1,4 +1,5 @@
 #include "widget/Menu.h"
+#include "Application.h"
 #include "widget/MenuItem.h"
 #include "console/Console.h"
 #include <string>
@@ -6,6 +7,7 @@
 #include <iostream>
 
 using namespace std;
+using namespace Console;
 
 void MenuItem::SetLabel(const string& text)
 {
@@ -43,7 +45,7 @@ void MenuItem::SetAction(function<void()> func)
 
 void MenuItem::RenderWidget()
 {
-    ConsoleTty* console = ConsoleTty::getTty();
+    ConsoleTty* console = Application::GetConsole();
     ColorScheme scheme = console->getColorScheme();
 
     console->setColor(selected ? scheme.MenuSelected : scheme.Menu);

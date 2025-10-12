@@ -1,6 +1,7 @@
+#include "event/EventQueue.h"
+#include "Application.h"
 #include "console/Console.h"
 #include "console/ConsoleTools.h"
-#include "event/EventQueue.h"
 #include "event/KeyboardTools.h"
 #include "widget/AbstractWidget.h"
 #include <deque>
@@ -8,24 +9,14 @@
 using namespace std;
 using namespace Console;
 
-EventQueue* EventQueue::instance = nullptr;
-
 EventQueue::EventQueue()
 {
     queue = deque<Event>();
-    lastScreenSize = ConsoleTty::getTty()->getConsoleSize();
+    ConsoleTty* console = Application::GetConsole();
+    lastScreenSize = console->getConsoleSize();
 }
 
-EventQueue* EventQueue::GetInstance()
-{
-    if (instance == nullptr) {
-        instance = new EventQueue();
-    }
-
-    return instance;
-}
-
-void EventQueue::Shutdown()
+EventQueue::~EventQueue()
 {
     queue.clear();
 }
@@ -59,7 +50,7 @@ void EventQueue::Loop(AbstractWidget* root)
     }
 
     // Poll Screen resize
-    Size screenSize = ConsoleTty::getTty()->getConsoleSize();
+    Size screenSize = Application::GetConsole()->getConsoleSize();
 
     if (screenSize.Width != lastScreenSize.Width || screenSize.Height != lastScreenSize.Height) {
         lastScreenSize.Width = screenSize.Width;

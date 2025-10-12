@@ -8,7 +8,7 @@ using namespace std;
 namespace Console {
     ColorSchemeManager::ColorSchemeManager()
     {
-        ColorScheme scheme = ColorScheme(
+        ColorScheme defaultScheme = ColorScheme(
             ColorStyle(ForegroundColors::WHITE, BackgroundColors::BLUE), // paragraph
             ColorStyle(ForegroundColors::YELLOW, BackgroundColors::BLUE), // Highlight
             ColorStyle(ForegroundColors::CYAN, BackgroundColors::BLUE), // Heading
@@ -21,7 +21,7 @@ namespace Console {
         );
         
         ColorSchemes = map<string, ColorScheme>();
-        SelectedScheme = scheme;
+        SelectedScheme = defaultScheme;
 
         ColorScheme dialog = ColorScheme(
             ColorStyle(ForegroundColors::BLACK, BackgroundColors::WHITE), // paragraph
@@ -36,7 +36,7 @@ namespace Console {
         );
 
         addColorScheme(string("dialog"), dialog);
-        addColorScheme(string("default"), scheme);
+        addColorScheme(string("default"), defaultScheme);
     }
 
     void ColorSchemeManager::addColorScheme(string name, ColorScheme colorScheme)

@@ -1,8 +1,11 @@
 #include "widget/Menu.h"
+#include "Application.h"
 #include "widget/MenuItem.h"
 #include "console/Console.h"
 #include "event/KeyCodes.h"
 #include <cmath>
+
+using namespace Console;
 
 void Menu::SetHorizontal()
 {
@@ -115,7 +118,7 @@ void Menu::Invalidate()
 
 void Menu::RenderWidget()
 {
-    ConsoleTty* console = ConsoleTty::getTty();
+    ConsoleTty* console = Application::GetConsole();
     ColorScheme scheme = console->getColorScheme();
 
     console->setColor(scheme.Menu);

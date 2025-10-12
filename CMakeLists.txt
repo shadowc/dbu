@@ -36,7 +36,8 @@ configure_file(platform.h.in platform.h)
 
 set(
     PROJECT_SRC
-    "src/DBU.cpp" 
+    "src/DBU.cpp"
+    "src/Application.cpp"
     "src/event/KeyboardTools.cpp"
     "src/event/EventQueue.cpp"
     "src/console/Console.cpp"  
@@ -51,6 +52,9 @@ set(
     "src/widget/Dialog.cpp"
     "src/widget/Menu.cpp"
     "src/widget/MenuItem.cpp"
+    "src/menu-config/MenuConfig.cpp"
+    "src/menu-config/MenuEntry.cpp"
+    "src/menu-config/actions/ExitAction.cpp"
 )
 
 # Add source to this project's executable.

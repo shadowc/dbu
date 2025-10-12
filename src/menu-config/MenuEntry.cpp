@@ -12,7 +12,6 @@ MenuEntry::MenuEntry(string label, AbstractAction* action)
 
 MenuEntry::~MenuEntry()
 {
-    // Clean up action if it was dynamically allocated
     if (action) {
         delete action;
         action = nullptr;

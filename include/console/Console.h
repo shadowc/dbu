@@ -7,13 +7,11 @@
 
 namespace Console {
     class ConsoleTty {
-    private:
-        ConsoleTty();
-
     public:
-        static ConsoleTty* getTty();
-        ColorSchemeManager* colorSchemeManager;
+        ConsoleTty();
+        ~ConsoleTty();
 
+        ColorSchemeManager* colorSchemeManager;
         ColorScheme getColorScheme();
 
         void setColor(Color fg_color);
@@ -42,10 +40,7 @@ namespace Console {
 
         void Flush();
 
-        void shutdown();
-
     private:
-        static ConsoleTty* instance;
         bool cursorVisible;
         vector<Mask> masks;
     };
