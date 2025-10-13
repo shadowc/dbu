@@ -49,7 +49,7 @@ void MenuItem::RenderWidget()
     ColorScheme scheme = console->getColorScheme();
 
     console->setColor(selected ? scheme.MenuSelected : scheme.Menu);
-    console->FillLine(coords.Y, coords.X, coords.X + size.Width, ' ');
+    console->FillLine(coords.Y, coords.X, coords.X + size.Width - 1, ' ');
     console->setPos(coords.X, coords.Y);
     cout << label;
 }

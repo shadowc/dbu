@@ -153,10 +153,10 @@ void Menu::RenderWidget()
     console->setColor(scheme.Menu);
 
     if (hasBorder) {
-        console->DrawBox(coords.X, coords.Y, size.Width, size.Height);
+        console->DrawBox(coords.X, coords.Y, size.Width - 1, size.Height - 1);
     } else {
         for (int y = coords.Y; y < coords.Y + size.Height; y++) {
-            console->FillLine(y, coords.X, coords.X + size.Width, ' ');
+            console->FillLine(y, coords.X, coords.X + size.Width - 1, ' ');
         }
     }
 }

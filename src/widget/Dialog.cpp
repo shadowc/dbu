@@ -47,10 +47,10 @@ void Dialog::RenderWidget()
     // paint background
     console->setColor(scheme.Paragraph);
 
-    console->DrawBox(coords.X, coords.Y, size.Width, size.Height);
+    console->DrawBox(coords.X, coords.Y, size.Width - 1, size.Height - 1);
 
     // Center title
-    console->CenterString(coords.Y, coords.X, coords.X + size.Width, title);
+    console->CenterString(coords.Y, coords.X, coords.X + size.Width - 1, title);
 }
 
 bool Dialog::HasActiveMask()
