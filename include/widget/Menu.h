@@ -1,5 +1,6 @@
 #pragma once
 #include "AbstractWidget.h"
+#include <functional>
 
 class Menu : public AbstractWidget
 {
@@ -17,6 +18,8 @@ public:
     int GetSelectedItem();
 
     void OnEvent(Event& event) override;
+
+    function<void()> onExitMenu = nullptr;
 
 protected:
     void Invalidate() override;

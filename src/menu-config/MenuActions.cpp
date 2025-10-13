@@ -11,5 +11,5 @@ void MenuActions::ExitAction()
 
 void MenuActions::RenderConnectionsSubMenu()
 {
-    Application::GetMenuConfig()->ActivateSubMenu(0);
+    Application::GetMenuConfig()->ActivateSubMenu();
 }

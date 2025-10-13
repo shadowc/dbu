@@ -47,36 +47,6 @@ void MenuConfig::RenderMenu()
 
         initialized = true;
     }
-
-    vector<MenuEntry> curEntries = entries;
-    for (int i = 0; i < openSubMenuIndexes.size(); i++) {
-        int menuIndex = openSubMenuIndexes.at(i);
-
-        vector<MenuEntry> subMenuEntries = curEntries.at(menuIndex).subEntries;
-
-        if (activeMenus.size() <= i + 1) {
-            Menu* subMenu = new Menu();
-            subMenu->SetVertical();
-            subMenu->SetTopPadding(0);
-            subMenu->SetPosition(1, 2);
-
-            for (MenuEntry entry: subMenuEntries) {
-                MenuItem* item = new MenuItem();
-
-                item->SetLabel(" " + entry.label + " ");
-                if (entry.action != nullptr) {
-                    item->SetAction(entry.action);
-                }
-
-                subMenu->AddChild(item);
-            }
-
-            screen->AddChild(subMenu);
-            activeMenus.push_back(subMenu);
-        }
-
-        curEntries = subMenuEntries;
-    }
 }
 
 void MenuConfig::ActivateMenu()
@@ -89,32 +59,76 @@ void MenuConfig::ActivateMenu()
     }
 }
 
-void MenuConfig::ActivateSubMenu(int index)
+void MenuConfig::ActivateSubMenu()
 {
-    openSubMenuIndexes.push_back(index);
-    RenderMenu();
+    Screen* screen = Application::GetScreen();
+    Menu* parentMenu = activeMenus.back();
+    int selectedIndex = parentMenu->GetSelectedItem();
+
+    if (parentMenu != nullptr && selectedIndex >= 0) {
+        vector<MenuEntry> subMenuEntries = FindNextSubEntries();
+
+        if (subMenuEntries.size() == 0) {
+            return;
+        }
+
+        Menu* subMenu = new Menu();
+        subMenu->SetVertical();
+        subMenu->SetTopPadding(0);
+        // TODO: Calculate position based on parent menu item position
+        subMenu->SetPosition(1, 2);
+
+        for (MenuEntry entry: subMenuEntries) {
+            MenuItem* item = new MenuItem();
+
+            item->SetLabel(" " + entry.label + " ");
+            if (entry.action != nullptr) {
+                item->SetAction(entry.action);
+            }
+
+            subMenu->AddChild(item);
+        }
+
+        subMenu->onExitMenu = [this]() { this->DeactivateSubMenu(); };
+        screen->AddChild(subMenu);
+        activeMenus.push_back(subMenu);
+        subMenu->SetSelectedItem(0);
+        subMenu->Focus();
+    }
 }
 
 void MenuConfig::DeactivateSubMenu()
 {
-    if (!openSubMenuIndexes.empty()) {
-        openSubMenuIndexes.pop_back();
+    Menu* lastSubMenu = activeMenus.back();
 
-        Menu* subMenu = activeMenus.back();
+    if (lastSubMenu != nullptr) {
+            lastSubMenu->Blur();
+            Application::GetScreen()->RemoveChild(lastSubMenu);
+            delete lastSubMenu;
+    }
 
-        if (subMenu != nullptr) {
-            subMenu->Blur();
-            Application::GetScreen()->RemoveChild(subMenu);
-            delete subMenu;
-        }
+    activeMenus.pop_back();
 
-        activeMenus.pop_back();
+    Menu* parentMenu = activeMenus.back();
+    if (parentMenu != nullptr) {
+        parentMenu->Focus();
+    }
+}
 
-        Menu* parentMenu = activeMenus.back();
-        if (parentMenu != nullptr) {
-            parentMenu->Focus();
+vector<MenuEntry> MenuConfig::FindNextSubEntries()
+{
+    vector<MenuEntry> subEntries = entries;
+    
+    for (int i = 0; i < activeMenus.size() - 1; i++) {
+        Menu* menu = activeMenus.at(i);
+        int selectedIndex = menu->GetSelectedItem();
+
+        if (selectedIndex >= 0 && selectedIndex < subEntries.size()) {
+            subEntries = subEntries.at(selectedIndex).subEntries;
+        } else {
+            return vector<MenuEntry>();
         }
     }
 
-    RenderMenu();
+    return subEntries;
 }

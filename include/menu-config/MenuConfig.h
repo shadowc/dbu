@@ -11,13 +11,14 @@ public:
     void RenderMenu();
 
     void ActivateMenu();
-    void ActivateSubMenu(int index);
+    void ActivateSubMenu();
     void DeactivateSubMenu();
 
 private:
     vector<MenuEntry> entries;
     vector<Menu*> activeMenus;
-    vector<int> openSubMenuIndexes;
+
+    vector<MenuEntry> FindNextSubEntries();
 
     bool initialized;
 };

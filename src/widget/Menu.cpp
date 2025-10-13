@@ -177,6 +177,10 @@ void Menu::HandleKeyPressedHorizontal(Event& event)
         case (KEY_UP):
             SetSelectedItem(-1);
             Blur();
+
+            if (onExitMenu != nullptr) {
+                onExitMenu();
+            }
             break;
     }
 }
@@ -228,6 +232,10 @@ void Menu::HandleKeyPressedVertical(Event& event)
         case (KEY_ESC):
             SetSelectedItem(-1);
             Blur();
+
+            if (onExitMenu != nullptr) {
+                onExitMenu();
+            }
             break;
     }
 }
