@@ -13,6 +13,8 @@ public:
     void ActivateMenu();
     void ActivateSubMenu();
     void DeactivateSubMenu();
+    void CycleMenuRight();
+    void CycleMenuLeft();
 
 private:
     vector<MenuEntry> entries;

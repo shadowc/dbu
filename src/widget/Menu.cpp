@@ -214,6 +214,18 @@ void Menu::HandleKeyPressedVertical(Event& event)
             }
             break;
 
+        case (KEY_RIGHT):
+            if (onMenuCycleRight != nullptr) {
+                onMenuCycleRight();
+            }
+            break;
+
+        case (KEY_LEFT):
+            if (onMenuCycleLeft != nullptr) {
+                onMenuCycleLeft();
+            }
+            break;
+    
         case (KEY_ENTER):
             {
                 int selectedIndex = GetSelectedItem();

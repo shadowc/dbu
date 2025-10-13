@@ -20,6 +20,8 @@ public:
     void OnEvent(Event& event) override;
 
     function<void()> onExitMenu = nullptr;
+    function<void()> onMenuCycleRight = nullptr;
+    function<void()> onMenuCycleLeft = nullptr;
 
 protected:
     void Invalidate() override;

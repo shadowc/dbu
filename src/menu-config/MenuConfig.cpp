@@ -90,6 +90,8 @@ void MenuConfig::ActivateSubMenu()
         }
 
         subMenu->onExitMenu = [this]() { this->DeactivateSubMenu(); };
+        subMenu->onMenuCycleRight = [this]() { this->CycleMenuRight(); };
+        subMenu->onMenuCycleLeft = [this]() { this->CycleMenuLeft(); };
         screen->AddChild(subMenu);
         activeMenus.push_back(subMenu);
         subMenu->SetSelectedItem(0);
@@ -119,7 +121,7 @@ vector<MenuEntry> MenuConfig::FindNextSubEntries()
 {
     vector<MenuEntry> subEntries = entries;
     
-    for (int i = 0; i < activeMenus.size() - 1; i++) {
+    for (int i = 0; i < activeMenus.size(); i++) {
         Menu* menu = activeMenus.at(i);
         int selectedIndex = menu->GetSelectedItem();
 
@@ -131,4 +133,40 @@ vector<MenuEntry> MenuConfig::FindNextSubEntries()
     }
 
     return subEntries;
+}
+
+void MenuConfig::CycleMenuRight()
+{
+    DeactivateSubMenu();
+    Menu* mainMenu = activeMenus.at(0);
+
+    if (mainMenu != nullptr) {
+        int selectedIndex = mainMenu->GetSelectedItem();
+        int newIndex = selectedIndex + 1;
+
+        if (newIndex >= mainMenu->GetChildLength()) {
+            newIndex = 0;
+        }
+
+        mainMenu->SetSelectedItem(newIndex);
+        ActivateSubMenu();
+    }
+}
+
+void MenuConfig::CycleMenuLeft()
+{
+    DeactivateSubMenu();
+    Menu* mainMenu = activeMenus.at(0);
+
+    if (mainMenu != nullptr) {
+        int selectedIndex = mainMenu->GetSelectedItem();
+        int newIndex = selectedIndex - 1;
+
+        if (newIndex < 0) {
+            newIndex = mainMenu->GetChildLength() - 1;
+        }
+
+        mainMenu->SetSelectedItem(newIndex);
+        ActivateSubMenu();
+    }
 }
