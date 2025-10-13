@@ -1,11 +1,11 @@
 #include "platform.h"
 #include "widget/Screen.h"
 #include "Application.h"
-#include "widget/Menu.h"
 #include "console/Console.h"
 #include "console/ConsoleTools.h"
 #include "event/EventQueue.h"
 #include "event/KeyCodes.h"
+#include "menu-config/MenuConfig.h"
 #include <iostream>
 #include <string>
 #include <thread>
@@ -92,13 +92,7 @@ void Screen::OnEvent(Event& event)
                     break;
 
                 case (KEY_F9):
-                    Menu* menu = FindMenu();
-
-                    if (menu != nullptr) {
-                        menu->SetSelectedItem(0);
-                        menu->Focus();
-                    }
-
+                    Application::GetMenuConfig()->ActivateMenu();
                     break;
             }
 
@@ -109,17 +103,4 @@ void Screen::OnEvent(Event& event)
             OnResize();
             break;
     }
-}
-
-Menu* Screen::FindMenu()
-{
-    for (int i = 0; i < GetChildLength(); ++i) {
-        Menu* menu = dynamic_cast<Menu*>(GetChildAt(i));
-
-        if (menu != nullptr) {
-            return menu;
-        }
-    }
-
-    return nullptr;
 }

@@ -3,8 +3,6 @@
 #include "event/EventDef.h"
 #include <string>
 
-class Menu;
-
 class Screen : public AbstractWidget
 {
 public:
@@ -20,6 +18,4 @@ protected:
     string platformName;
     string versionMajor;
     string versionMinor;
-
-    Menu* FindMenu();
 };

@@ -101,3 +101,8 @@ Screen* Application::GetScreen()
 {
     return screen;
 }
+
+MenuConfig* Application::GetMenuConfig()
+{
+    return menuConfig;
+}

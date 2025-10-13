@@ -17,6 +17,7 @@ public:
     static EventQueue* GetEventQueue();
     static ConsoleTty* GetConsole();
     static Screen* GetScreen();
+    static MenuConfig* GetMenuConfig();
 
 private:
     static EventQueue* eventQueue;
