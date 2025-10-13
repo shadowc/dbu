@@ -76,6 +76,8 @@ void MenuConfig::ActivateSubMenu()
         Menu* subMenu = new Menu();
         subMenu->SetVertical();
         subMenu->SetTopPadding(0);
+        subMenu->SetHasBorder(true);
+
         // TODO: Calculate position based on parent menu item position
         Coords position = GetPositionForSubMenu(parentMenu, selectedIndex);
         subMenu->SetPosition(position.X, position.Y);

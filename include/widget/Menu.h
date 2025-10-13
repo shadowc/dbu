@@ -13,6 +13,8 @@ public:
 
     void SetTopPadding(int padding);
     void SetSidePadding(int padding);
+    void SetHasBorder(bool hasBorder);
+    bool HasBorder() const;
 
     void SetSelectedItem(int index);
     int GetSelectedItem();
@@ -33,4 +35,5 @@ protected:
     bool horizontal = true;
     int topPadding = 1;
     int sidePadding = 0;
+    bool hasBorder = false;
 };

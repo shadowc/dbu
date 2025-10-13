@@ -95,8 +95,8 @@ void MenuItem::Invalidate()
             coords.X = previousItem->coords.X + previousItem->size.Width;
         }
     } else {
-        coords.X = parentCoords.X;
-        coords.Y = parentCoords.Y + itemIndex;
-        size.Width = parentSize.Width;
-    }   
+        coords.X = parentCoords.X + (menuParent->HasBorder() ? 1 : 0);
+        coords.Y = parentCoords.Y + itemIndex + (menuParent->HasBorder() ? 1 : 0);
+        size.Width = parentSize.Width - (menuParent->HasBorder() ? 2 : 0);
+    }
 }

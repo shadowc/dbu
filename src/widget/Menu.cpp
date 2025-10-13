@@ -49,6 +49,19 @@ void Menu::SetSidePadding(int padding)
     }
 }
 
+void Menu::SetHasBorder(bool hasBorder)
+{
+    if (hasBorder != this->hasBorder) {
+        this->hasBorder = hasBorder;
+        Invalidate();
+    }
+}
+
+bool Menu::HasBorder() const
+{
+    return hasBorder;
+}
+
 void Menu::SetSelectedItem(int index)
 {
     for (AbstractWidget* child : children) {
@@ -103,16 +116,32 @@ void Menu::Invalidate()
 {
     AbstractWidget::Invalidate();
 
-    if (parent != nullptr && horizontal) {
-       // center dialog on parent screenspace
-        Coords parentCoords = parent->GetPosition();
-        Size parentSize = parent->GetSize();
+    if (parent != nullptr) {
+        if (horizontal) {
+            // position menu at the top of the parent with the specified padding
+            Coords parentCoords = parent->GetPosition();
+            Size parentSize = parent->GetSize();
 
-        coords.X = max(0, parentCoords.X + sidePadding);
-        coords.Y = max(0, parentCoords.Y + topPadding);
+            coords.X = max(0, parentCoords.X + sidePadding);
+            coords.Y = max(0, parentCoords.Y + topPadding);
 
-        size.Width = max(0, parentSize.Width - (sidePadding * 2)); 
-        size.Height = 1; // fixed height for horizontal menu 
+            size.Width = max(0, parentSize.Width - (sidePadding * 2)); 
+            size.Height = 1; // fixed height for horizontal menu
+        } else {
+            // calculate size based on children
+            size.Height = GetChildLength() + (hasBorder ? 2 : 0); // one line per item plus border
+            int width = 0;
+
+            for (AbstractWidget* child : children) {
+                MenuItem* menuItem = dynamic_cast<MenuItem*>(child);
+
+                if (menuItem != nullptr) {
+                    width = max(width, (int) menuItem->GetLabel().length());
+                }
+            }
+
+            size.Width = width + (hasBorder ? 2 : 0); // add border width
+        }
     }
 }
 
@@ -123,8 +152,12 @@ void Menu::RenderWidget()
 
     console->setColor(scheme.Menu);
 
-    for (int y = coords.Y; y < coords.Y + size.Height; y++) {
-        console->FillLine(y, coords.X, coords.X + size.Width, ' ');
+    if (hasBorder) {
+        console->DrawBox(coords.X, coords.Y, size.Width, size.Height);
+    } else {
+        for (int y = coords.Y; y < coords.Y + size.Height; y++) {
+            console->FillLine(y, coords.X, coords.X + size.Width, ' ');
+        }
     }
 }
 
