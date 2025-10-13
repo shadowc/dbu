@@ -4,6 +4,7 @@
 #include "widget/Screen.h"
 #include "widget/Menu.h"
 #include "widget/MenuItem.h"
+#include "console/ConsoleTools.h"
 
 MenuConfig::MenuConfig()
 {
@@ -76,7 +77,8 @@ void MenuConfig::ActivateSubMenu()
         subMenu->SetVertical();
         subMenu->SetTopPadding(0);
         // TODO: Calculate position based on parent menu item position
-        subMenu->SetPosition(1, 2);
+        Coords position = GetPositionForSubMenu(parentMenu, selectedIndex);
+        subMenu->SetPosition(position.X, position.Y);
 
         for (MenuEntry entry: subMenuEntries) {
             MenuItem* item = new MenuItem();
@@ -169,4 +171,27 @@ void MenuConfig::CycleMenuLeft()
         mainMenu->SetSelectedItem(newIndex);
         ActivateSubMenu();
     }
+}
+
+Coords MenuConfig::GetPositionForSubMenu(Menu* parentMenu, int selectedIndex)
+{
+    // Get parent menu position and size
+    Coords parentPos = parentMenu->GetPosition();
+    Size parentSize = parentMenu->GetSize();
+
+    // Get selected menu item position
+    AbstractWidget* selectedItem = parentMenu->GetChildAt(selectedIndex);
+    Coords itemPos = selectedItem->GetPosition();
+    Size itemSize = selectedItem->GetSize();
+
+    int x, y;
+    if (parentMenu->IsHorizontal()) {
+        x = itemPos.X;
+        y = parentPos.Y + parentSize.Height;
+    } else {
+        x = parentPos.X + parentSize.Width;
+        y = itemPos.Y;
+    }
+
+    return Coords(x, y);
 }

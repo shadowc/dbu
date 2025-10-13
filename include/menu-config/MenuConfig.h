@@ -1,7 +1,9 @@
 #pragma once
 #include "MenuEntry.h"
+#include "console/ConsoleTools.h"
 #include <vector>
 
+using namespace Console;
 class Menu;
 
 class MenuConfig
@@ -21,6 +23,7 @@ private:
     vector<Menu*> activeMenus;
 
     vector<MenuEntry> FindNextSubEntries();
+    Coords GetPositionForSubMenu(Menu* parentMenu, int selectedIndex);
 
     bool initialized;
 };
