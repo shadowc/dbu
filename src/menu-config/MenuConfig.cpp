@@ -16,9 +16,9 @@ MenuConfig::MenuConfig()
 
     MenuEntry connectionsEntry = MenuEntry("Connections", MenuActions::RenderConnectionsSubMenu);
 
-    connectionsEntry.AddEntry(MenuEntry("Connect to Server..."));
-    connectionsEntry.AddEntry(MenuEntry("Disconnect", nullptr, EnabledCallbacks::DisconnectEnabled));
-    connectionsEntry.AddEntry(MenuEntry("Manage Connections..."));
+    connectionsEntry.AddEntry(MenuEntry("Connect to Server...", MenuActions::ConnectToServerAction));
+    connectionsEntry.AddEntry(MenuEntry("Disconnect", MenuActions::DisconnectAction, EnabledCallbacks::DisconnectEnabled));
+    connectionsEntry.AddEntry(MenuEntry("Manage Connections...", MenuActions::ManageConnectionsAction));
 
     entries.push_back(connectionsEntry);
 
@@ -63,6 +63,20 @@ void MenuConfig::ActivateMenu()
     if (mainMenu != nullptr) {
         mainMenu->SetSelectedItem(0);
         mainMenu->Focus();
+    }
+}
+
+void MenuConfig::DeactivateMenu()
+{
+    while (activeMenus.size() > 1) {
+        DeactivateSubMenu();
+    }
+
+    Menu* mainMenu = activeMenus.at(0);
+
+    if (mainMenu != nullptr) {
+        mainMenu->SetSelectedItem(-1);
+        mainMenu->Blur();
     }
 }
 

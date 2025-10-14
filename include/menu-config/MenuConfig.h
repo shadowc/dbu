@@ -13,6 +13,7 @@ public:
     void RenderMenu();
 
     void ActivateMenu();
+    void DeactivateMenu();
     void ActivateSubMenu();
     void DeactivateSubMenu();
     void CycleMenuRight();
