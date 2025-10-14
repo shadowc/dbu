@@ -1,11 +1,11 @@
 #include "widget/StackItem.h"
 
-int StackItem::GetSize() const
+int StackItem::GetStackSize() const
 {
     return sizeInStack;
 }
 
-void StackItem::SetSize(int newSize)
+void StackItem::SetStackSize(int newSize)
 {
     sizeInStack = newSize;
     if (parent != nullptr) {

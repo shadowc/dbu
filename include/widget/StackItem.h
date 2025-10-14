@@ -4,8 +4,8 @@
 class StackItem : AbstractWidget
 {
 public:
-    void SetSize(int newSize);
-    int GetSize() const;
+    void SetStackSize(int newSize);
+    int GetStackSize() const;
 
 private:
     int sizeInStack = 0;

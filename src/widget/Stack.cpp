@@ -4,6 +4,7 @@
 #include "widget/Screen.h"
 #include "widget/Dialog.h"
 #include <stdexcept>
+#include <cmath>
 
 Stack::Stack()
 {
@@ -23,7 +24,59 @@ void Stack::AddChild(AbstractWidget* child)
 
 void Stack::Invalidate()
 {
-    
+    if (parent == nullptr) {
+        AbstractWidget::Invalidate();
+        return;
+    }
+
+    // adjust to parent width and height and then set the width and height of
+    // children based on the property StackChild::size
+    Size parentSize = parent->GetSize();
+    Coords parentCoords = parent->GetPosition();
+
+    SetPosition(parentCoords.X + padding.Left, parentCoords.Y + padding.Top);
+    SetSize(parentSize.Width - padding.Left - padding.Right, parentSize.Height - padding.Top - padding.Bottom);
+
+    int remainingSize = direction == StackDirections::HORIZONTAL ? size.Width : size.Height;
+    int remainingSizeDivisibleBy = 0;
+
+    for (AbstractWidget* child : children) {
+        StackItem* stackItemChild = dynamic_cast<StackItem*>(child);
+
+        if (stackItemChild == nullptr) {
+            throw new runtime_error("Found a child of Stack Widget that is not a StackItem widget");
+        }
+
+        int childSize = stackItemChild->GetStackSize();
+
+        remainingSize -= childSize;
+        if (childSize == 0) {
+            remainingSizeDivisibleBy++;
+        }
+    }
+
+    int curPosition = 0;
+    for (AbstractWidget* child : children) {
+        StackItem* stackItemChild = dynamic_cast<StackItem*>(child);
+        int childSize = stackItemChild->GetStackSize();
+
+        if (childSize == 0) {
+            childSize = floor(remainingSize / remainingSizeDivisibleBy);
+        }
+
+        int calculatedWidth = direction == StackDirections::HORIZONTAL ? childSize : size.Width;
+        int calculatedHeight = direction == StackDirections::HORIZONTAL ? size.Height : childSize;
+
+        int calculatedX = direction == StackDirections::HORIZONTAL ? 0 : curPosition;
+        int calculatedY = direction == StackDirections::HORIZONTAL ? curPosition : 0;
+
+        child->SetPosition(calculatedX, calculatedY);
+        child->SetSize(calculatedWidth, calculatedHeight);  
+        
+        curPosition += direction == StackDirections::HORIZONTAL ? calculatedY : calculatedX;
+    }
+
+    AbstractWidget::Invalidate();
 }
 
 void Stack::SetParent(AbstractWidget *parent)

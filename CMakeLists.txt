@@ -55,6 +55,7 @@ set(
     "src/widget/HStack.cpp"
     "src/widget/Screen.cpp"
     "src/widget/Stack.cpp"
+    "src/widget/StackItem.cpp"
     "src/widget/Dialog.cpp"
     "src/widget/Menu.cpp"
     "src/widget/MenuItem.cpp"
