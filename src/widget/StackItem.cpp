@@ -20,6 +20,7 @@ void StackItem::RenderWidget()
 {
     ConsoleTty *console = Application::GetConsole();
 
-    console->setPos(coords.X, coords.Y);
+    console->DrawBox(coords.X, coords.Y, size.Width - 1, size.Height - 1);
+    console->setPos(coords.X + 1, coords.Y + 1);
     cout << "xxx";
 }

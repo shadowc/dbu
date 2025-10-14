@@ -57,7 +57,11 @@ void Stack::Invalidate()
         }
     }
 
-    int curPosition = 0;
+    if (remainingSize < 0) {
+        remainingSize = 0;
+    }
+
+    int curPosition = direction == StackDirections::HORIZONTAL ? coords.X : coords.Y;
     for (AbstractWidget* child : children) {
         StackItem* stackItemChild = dynamic_cast<StackItem*>(child);
         int childSize = stackItemChild->GetStackSize();
@@ -69,13 +73,13 @@ void Stack::Invalidate()
         int calculatedWidth = direction == StackDirections::HORIZONTAL ? childSize : size.Width;
         int calculatedHeight = direction == StackDirections::HORIZONTAL ? size.Height : childSize;
 
-        int calculatedX = direction == StackDirections::HORIZONTAL ? 0 : curPosition;
-        int calculatedY = direction == StackDirections::HORIZONTAL ? curPosition : 0;
+        int calculatedX = direction == StackDirections::HORIZONTAL ? curPosition : coords.Y;
+        int calculatedY = direction == StackDirections::HORIZONTAL ? coords.X : curPosition;
 
         child->SetPosition(calculatedX, calculatedY);
         child->SetSize(calculatedWidth, calculatedHeight);  
         
-        curPosition += direction == StackDirections::HORIZONTAL ? calculatedY : calculatedX;
+        curPosition += direction == StackDirections::HORIZONTAL ? calculatedX : calculatedY;
     }
 
     AbstractWidget::Invalidate();
