@@ -56,6 +56,7 @@ set(
     "src/widget/Dialog.cpp"
     "src/widget/Menu.cpp"
     "src/widget/MenuItem.cpp"
+    "src/menu-config/EnabledCallbacks.cpp"
     "src/menu-config/MenuConfig.cpp"
     "src/menu-config/MenuEntry.cpp"
     "src/menu-config/MenuActions.cpp"

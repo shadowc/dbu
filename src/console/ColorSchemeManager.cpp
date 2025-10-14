@@ -21,9 +21,9 @@ namespace Console {
             ColorStyle(ForegroundColors::BRIGHT_WHITE, BackgroundColors::GREY), // Button Secondary
             ColorStyle(ForegroundColors::BRIGHT_WHITE, BackgroundColors::RED), // Button Danger
             ColorStyle(ForegroundColors::WHITE, BackgroundColors::GREY), // Menu
-            ForegroundColors::CYAN, // Menu Highlight
-            ForegroundColors::GREY, // Menu Disabled
-            BackgroundColors::CYAN // Menu Selected
+            ColorStyle(ForegroundColors::WHITE, BackgroundColors::CYAN), // Menu Selected
+            ColorStyle(ForegroundColors::BLACK, BackgroundColors::GREY), // Menu Disabled
+            ColorStyle(ForegroundColors::GREY, BackgroundColors::CYAN) // Menu Selected
         );
         
         ColorSchemes = map<string, ColorScheme>();
@@ -39,9 +39,9 @@ namespace Console {
             ColorStyle(ForegroundColors::BRIGHT_WHITE, BackgroundColors::GREY), // Button Secondary
             ColorStyle(ForegroundColors::BRIGHT_WHITE, BackgroundColors::RED), // Button Danger
             ColorStyle(ForegroundColors::WHITE, BackgroundColors::GREY), // Menu
-            ForegroundColors::CYAN, // Menu Highlight
-            ForegroundColors::GREY, // Menu Disabled
-            BackgroundColors::BLUE // Menu Selected
+            ColorStyle(ForegroundColors::WHITE, BackgroundColors::CYAN), // Menu Selected
+            ColorStyle(ForegroundColors::BLACK, BackgroundColors::GREY), // Menu Disabled
+            ColorStyle(ForegroundColors::GREY, BackgroundColors::CYAN) // Menu Selected
         );
 
         addColorScheme(string("dialog"), dialog);

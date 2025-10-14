@@ -1,5 +1,6 @@
 #include "menu-config/MenuConfig.h"
 #include "menu-config/MenuActions.h"
+#include "menu-config/EnabledCallbacks.h"
 #include "widget/WidgetLayers.h"
 #include "Application.h"
 #include "widget/Screen.h"
@@ -16,7 +17,7 @@ MenuConfig::MenuConfig()
     MenuEntry connectionsEntry = MenuEntry("Connections", MenuActions::RenderConnectionsSubMenu);
 
     connectionsEntry.AddEntry(MenuEntry("Connect to Server..."));
-    connectionsEntry.AddEntry(MenuEntry("Disconnect"));
+    connectionsEntry.AddEntry(MenuEntry("Disconnect", nullptr, EnabledCallbacks::DisconnectEnabled));
     connectionsEntry.AddEntry(MenuEntry("Manage Connections..."));
 
     entries.push_back(connectionsEntry);
@@ -39,6 +40,10 @@ void MenuConfig::RenderMenu()
             item->SetLabel(" " + entry.label + " ");
             if (entry.action != nullptr) {
                 item->SetAction(entry.action);
+            }
+
+            if (entry.isEnabledCallback != nullptr) {
+                item->SetIsEnabledCallback(entry.isEnabledCallback);
             }
 
             horizontalMenu->AddChild(item);
@@ -84,12 +89,16 @@ void MenuConfig::ActivateSubMenu()
         Coords position = GetPositionForSubMenu(parentMenu, selectedIndex);
         subMenu->SetPosition(position.X, position.Y);
 
-        for (MenuEntry entry: subMenuEntries) {
+        for (MenuEntry entry : subMenuEntries) {
             MenuItem* item = new MenuItem();
 
             item->SetLabel(" " + entry.label + " ");
             if (entry.action != nullptr) {
                 item->SetAction(entry.action);
+            }
+
+            if (entry.isEnabledCallback != nullptr) {
+                item->SetIsEnabledCallback(entry.isEnabledCallback);
             }
 
             subMenu->AddChild(item);

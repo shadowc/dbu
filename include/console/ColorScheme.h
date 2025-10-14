@@ -16,9 +16,9 @@ namespace Console {
             ButtonSecondary = ColorStyle();
             ButtonDanger = ColorStyle();
             Menu = ColorStyle();
-            MenuHighlight = ForegroundColors::CYAN;
-            MenuDisabled = ForegroundColors::GREY;
-            MenuSelected = BackgroundColors::BLUE;
+            MenuSelected = ColorStyle();
+            MenuDisabled = ColorStyle();
+            MenuSelectedDisabled = ColorStyle();
         }
 
         ColorScheme(
@@ -31,9 +31,9 @@ namespace Console {
             ColorStyle btnS,
             ColorStyle btnD,
             ColorStyle m,
-            Color mH,
-            Color mD,
-            Color mS
+            ColorStyle mD,
+            ColorStyle mS,
+            ColorStyle mSD
         ) {
             Paragraph = p;
             Highlight = hi;
@@ -44,9 +44,9 @@ namespace Console {
             ButtonSecondary = btnS;
             ButtonDanger = btnD;
             Menu = m;
-            MenuHighlight = mH;
-            MenuDisabled = mD;
             MenuSelected = mS;
+            MenuDisabled = mD;
+            MenuSelectedDisabled = mSD;
         }
 
         ColorStyle Paragraph;
@@ -58,8 +58,8 @@ namespace Console {
         ColorStyle ButtonSecondary;
         ColorStyle ButtonDanger;
         ColorStyle Menu;
-        Color MenuHighlight;
-        Color MenuDisabled;
-        Color MenuSelected;
+        ColorStyle MenuDisabled;
+        ColorStyle MenuSelected;
+        ColorStyle MenuSelectedDisabled;
     };
 }

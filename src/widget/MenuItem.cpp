@@ -33,7 +33,7 @@ void MenuItem::SetSelected(bool isSelected)
 
 void MenuItem::Execute()
 {
-    if (action) {
+    if (action && IsEnabled()) {
         action();
     }
 }
@@ -62,7 +62,12 @@ void MenuItem::RenderWidget()
     ConsoleTty* console = Application::GetConsole();
     ColorScheme scheme = console->getColorScheme();
 
-    console->setColor(selected ? scheme.MenuSelected : scheme.Menu);
+    if (!IsEnabled()) {
+        console->setColor(selected ? scheme.MenuSelectedDisabled : scheme.MenuDisabled);
+    } else {
+        console->setColor(selected ? scheme.MenuSelected : scheme.Menu);
+    }
+
     console->FillLine(coords.Y, coords.X, coords.X + size.Width - 1, ' ');
     console->setPos(coords.X, coords.Y);
     cout << label;

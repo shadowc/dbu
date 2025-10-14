@@ -57,11 +57,11 @@ void Screen::RenderWidget()
     // Draw status bar
     console->FillLine(size.Height, coords.X, size.Width, ' ');
     console->setPos(2, size.Height);
-    console->setColor(ForegroundColors::CYAN);
+    console->setColor(scheme.TitleHighlight);
     printf("F9");
     console->setColor(scheme.TitleBar);
     printf(" Menu │ ");
-    console->setColor(ForegroundColors::CYAN);
+    console->setColor(scheme.TitleHighlight);
     printf("Esc");
     console->setColor(scheme.TitleBar);
     printf(" Exit");

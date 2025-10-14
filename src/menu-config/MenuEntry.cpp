@@ -4,10 +4,11 @@
 
 using namespace std;
 
-MenuEntry::MenuEntry(string label, function<void()> action)
+MenuEntry::MenuEntry(string label, function<void()> action, function<bool()> isEnabledCallback)
 {
     this->label = label;
     this->action = action;
+    this->isEnabledCallback = isEnabledCallback;
 }
 
 void MenuEntry::AddEntry(const MenuEntry& entry)
