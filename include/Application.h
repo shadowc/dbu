@@ -9,6 +9,7 @@ using namespace Console;
 class EventQueue;
 class Screen;
 class MenuManager;
+class DialogManager;
 
 class Application
 {
@@ -22,6 +23,7 @@ public:
     static Screen* GetScreen();
     static MenuManager* GetMenuManager();
     static vector<ConfigServerEntry> GetConfigServers();
+    static DialogManager* GetDialogManager();
 
 private:
     static EventQueue* eventQueue;
@@ -29,4 +31,5 @@ private:
     static Screen* screen;
     static MenuManager* menuManager;
     static Config* config;
+    static DialogManager* dialogManager;
 };

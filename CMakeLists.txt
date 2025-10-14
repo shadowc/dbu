@@ -60,6 +60,7 @@ set(
     "src/menu-manager/MenuManager.cpp"
     "src/menu-manager/MenuEntry.cpp"
     "src/menu-manager/MenuActions.cpp"
+    "src/dialog-manager/DialogManager.cpp"
 )
 
 # Add source to this project's executable.

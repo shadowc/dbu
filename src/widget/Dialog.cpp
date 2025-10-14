@@ -3,6 +3,8 @@
 #include "widget/AbstractWidget.h"
 #include "console/ConsoleTools.h"
 #include "console/Console.h"
+#include "event/EventDef.h"
+#include "event/KeyCodes.h"
 #include <cmath>
 #include <iostream>
 
@@ -63,6 +65,21 @@ void Dialog::SetParent(AbstractWidget* widget)
 {
     AbstractWidget::SetParent(widget);
     colorScheme = "dialog";
+}
+
+void Dialog::OnEvent(Event& event)
+{
+    if (event.Type != EventType::Keyboard) {
+        return;
+    }
+
+    switch (event.KeyCode) {
+        case (KEY_ESC):
+            event.Bubbling = false;
+            SetVisible(false);
+            Blur();
+            break;
+    }
 }
 
 void Dialog::Invalidate()

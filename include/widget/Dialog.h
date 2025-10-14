@@ -1,5 +1,6 @@
 #pragma once
 #include "AbstractWidget.h"
+#include "event/EventDef.h"
 #include <string>
 
 class Dialog : public AbstractWidget
@@ -12,6 +13,7 @@ public:
     bool HasActiveMask() override;
     void Invalidate() override;
     void SetParent(AbstractWidget* widget) override;
+    void OnEvent(Event& event) override;
 
 protected:
     void RenderWidget() override;

@@ -3,6 +3,7 @@
 #include "console/Console.h"
 #include "widget/Screen.h"
 #include "menu-manager/MenuManager.h"
+#include "dialog-manager/DialogManager.h"
 #include "config/Config.h"
 #include <vector>
 #include <thread>
@@ -15,6 +16,7 @@ ConsoleTty* Application::console = nullptr;
 Screen* Application::screen = nullptr;
 MenuManager* Application::menuManager = nullptr;
 Config* Application::config = nullptr;
+DialogManager* Application::dialogManager = nullptr;
 
 void Application::Initialize()
 {
@@ -38,10 +40,15 @@ void Application::Initialize()
         config = new Config();
     }
 
+    if (dialogManager == nullptr) {
+        dialogManager = new DialogManager();
+    }
+
     console->clearScreen();
     console->hideCursor();
 
     menuManager->RenderMenu();
+    dialogManager->AttachDialogsToScreen();
     screen->Invalidate();
     screen->Draw();
 }
@@ -93,6 +100,11 @@ void Application::Shutdown()
         menuManager = nullptr;
     }
 
+    if (dialogManager != nullptr) {
+        delete dialogManager;
+        dialogManager = nullptr;
+    }
+
     if (config != nullptr) {
         config->Save();
         delete config;
@@ -122,9 +134,10 @@ MenuManager* Application::GetMenuManager()
 
 vector<ConfigServerEntry> Application::GetConfigServers()
 {
-    if (config == nullptr) {
-        return vector<ConfigServerEntry>();
-    }
-
     return config->GetServers();
+}
+
+DialogManager* Application::GetDialogManager()
+{
+    return dialogManager;
 }
