@@ -43,6 +43,20 @@ void MenuItem::SetAction(function<void()> action)
     this->action = action;
 }
 
+void MenuItem::SetIsEnabledCallback(function<bool()> callback)
+{
+    isEnabledCallback = callback;
+}
+
+bool MenuItem::IsEnabled() const
+{
+    if (isEnabledCallback != nullptr) {
+        return isEnabledCallback();
+    }
+
+    return true;
+}
+
 void MenuItem::RenderWidget()
 {
     ConsoleTty* console = Application::GetConsole();

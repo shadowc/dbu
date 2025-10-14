@@ -1,5 +1,6 @@
 #include "menu-config/MenuConfig.h"
 #include "menu-config/MenuActions.h"
+#include "widget/WidgetLayers.h"
 #include "Application.h"
 #include "widget/Screen.h"
 #include "widget/Menu.h"
@@ -77,6 +78,7 @@ void MenuConfig::ActivateSubMenu()
         subMenu->SetVertical();
         subMenu->SetTopPadding(0);
         subMenu->SetHasBorder(true);
+        subMenu->SetLayer(WidgetLayer::MENUS);
 
         // TODO: Calculate position based on parent menu item position
         Coords position = GetPositionForSubMenu(parentMenu, selectedIndex);

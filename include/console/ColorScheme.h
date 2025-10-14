@@ -1,5 +1,8 @@
 #pragma once
 #include "ColorStyle.h"
+#include "ForegroundColors.h"
+#include "BackgroundColors.h"
+#include "Color.h"
 
 namespace Console { 
     struct ColorScheme {
@@ -8,11 +11,14 @@ namespace Console {
             Highlight = ColorStyle();
             Heading = ColorStyle();
             TitleBar = ColorStyle();
+            TitleHighlight = ForegroundColors::CYAN;
             ButtonPrimary = ColorStyle();
             ButtonSecondary = ColorStyle();
             ButtonDanger = ColorStyle();
             Menu = ColorStyle();
-            MenuSelected = ColorStyle();
+            MenuHighlight = ForegroundColors::CYAN;
+            MenuDisabled = ForegroundColors::GREY;
+            MenuSelected = BackgroundColors::BLUE;
         }
 
         ColorScheme(
@@ -20,20 +26,26 @@ namespace Console {
             ColorStyle hi,
             ColorStyle h,
             ColorStyle t,
+            Color tH,
             ColorStyle btnP,
             ColorStyle btnS,
             ColorStyle btnD,
             ColorStyle m,
-            ColorStyle mS
+            Color mH,
+            Color mD,
+            Color mS
         ) {
             Paragraph = p;
             Highlight = hi;
             Heading = h;
             TitleBar = t;
+            TitleHighlight = tH;
             ButtonPrimary = btnP;
             ButtonSecondary = btnS;
             ButtonDanger = btnD;
             Menu = m;
+            MenuHighlight = mH;
+            MenuDisabled = mD;
             MenuSelected = mS;
         }
 
@@ -41,10 +53,13 @@ namespace Console {
         ColorStyle Highlight;
         ColorStyle Heading;
         ColorStyle TitleBar;
+        Color TitleHighlight;
         ColorStyle ButtonPrimary;
         ColorStyle ButtonSecondary;
         ColorStyle ButtonDanger;
         ColorStyle Menu;
-        ColorStyle MenuSelected;
+        Color MenuHighlight;
+        Color MenuDisabled;
+        Color MenuSelected;
     };
 }

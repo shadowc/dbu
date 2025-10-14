@@ -14,6 +14,8 @@ public:
     void SetSelected(bool isSelected);
     void Execute();
     void SetAction(function<void()> action);
+    void SetIsEnabledCallback(function<bool()> callback);
+    bool IsEnabled() const;
 
 protected:
     string label;
@@ -22,4 +24,6 @@ protected:
 
     void RenderWidget() override;
     void Invalidate() override;
+
+    function<bool()> isEnabledCallback = nullptr;
 };

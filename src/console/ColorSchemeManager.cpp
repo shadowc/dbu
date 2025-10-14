@@ -1,6 +1,8 @@
 #include "console/ColorSchemeManager.h"
 #include "console/ColorScheme.h"
 #include "console/ColorStyle.h"
+#include "console/ForegroundColors.h"
+#include "console/BackgroundColors.h"
 #include <string>
 #include <map>
 
@@ -14,11 +16,14 @@ namespace Console {
             ColorStyle(ForegroundColors::YELLOW, BackgroundColors::BLUE), // Highlight
             ColorStyle(ForegroundColors::CYAN, BackgroundColors::BLUE), // Heading
             ColorStyle(ForegroundColors::BLACK, BackgroundColors::WHITE), // Title bar
+            ForegroundColors::CYAN, // Title highlight
             ColorStyle(ForegroundColors::BRIGHT_WHITE, BackgroundColors::CYAN), // Button Primary
             ColorStyle(ForegroundColors::BRIGHT_WHITE, BackgroundColors::GREY), // Button Secondary
             ColorStyle(ForegroundColors::BRIGHT_WHITE, BackgroundColors::RED), // Button Danger
             ColorStyle(ForegroundColors::WHITE, BackgroundColors::GREY), // Menu
-            ColorStyle(ForegroundColors::BRIGHT_WHITE, BackgroundColors::CYAN) // Menu Selected
+            ForegroundColors::CYAN, // Menu Highlight
+            ForegroundColors::GREY, // Menu Disabled
+            BackgroundColors::CYAN // Menu Selected
         );
         
         ColorSchemes = map<string, ColorScheme>();
@@ -29,11 +34,14 @@ namespace Console {
             ColorStyle(ForegroundColors::BLUE, BackgroundColors::WHITE), // Highlight
             ColorStyle(ForegroundColors::MAGENTA, BackgroundColors::WHITE), // Heading
             ColorStyle(ForegroundColors::BLACK, BackgroundColors::CYAN), // Title bar
+            ForegroundColors::CYAN, // Title highlight
             ColorStyle(ForegroundColors::BRIGHT_WHITE, BackgroundColors::BLUE), // Button Primary
             ColorStyle(ForegroundColors::BRIGHT_WHITE, BackgroundColors::GREY), // Button Secondary
             ColorStyle(ForegroundColors::BRIGHT_WHITE, BackgroundColors::RED), // Button Danger
             ColorStyle(ForegroundColors::WHITE, BackgroundColors::GREY), // Menu
-            ColorStyle(ForegroundColors::BRIGHT_WHITE, BackgroundColors::BLUE) // Menu Selected
+            ForegroundColors::CYAN, // Menu Highlight
+            ForegroundColors::GREY, // Menu Disabled
+            BackgroundColors::BLUE // Menu Selected
         );
 
         addColorScheme(string("dialog"), dialog);
