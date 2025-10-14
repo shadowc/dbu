@@ -27,8 +27,8 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     )
 
     message(NOTICE "...")
-    message(NOTICE "Make sure you have ncurses-devel package installed")
-    message(NOTICE "sudo apt-get install libncurses-dev")
+    message(NOTICE "Make sure you have required packages installed")
+    message(NOTICE "sudo apt-get install libncurses libncurses-dev libmariadb3 libmariadb-dev")
     message(NOTICE "...")
 endif()
 
