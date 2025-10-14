@@ -24,6 +24,8 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     set(EXTRA_INCLUDES_PATH
         "/usr/include"
         "/usr/local/include"
+        "/usr/include/mariadb"
+        "/usr/include/mariadb/mysql"
     )
 
     message(NOTICE "...")
@@ -67,5 +69,5 @@ target_include_directories(DBU PUBLIC
 )
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
-    target_link_libraries(DBU ncurses)
+    target_link_libraries(DBU ncurses mariadb)
 endif()

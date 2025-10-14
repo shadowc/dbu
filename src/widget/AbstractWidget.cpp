@@ -47,8 +47,23 @@ void AbstractWidget::Draw() {
         invalidated = false;
     }
 
+    vector<AbstractWidget*> layeredWidgets[4] = {
+        vector<AbstractWidget*>(),
+        vector<AbstractWidget*>(),
+        vector<AbstractWidget*>(),
+        vector<AbstractWidget*>(),
+    };
+
+    // Assign widget drawing order based on layer
     for (AbstractWidget* child : children) {
-        child->Draw();
+        layeredWidgets[(int)child->GetLayer()].push_back(child);
+    }
+
+    // call Draw on children in order of layer
+    for (int i = 0; i < 4; i++) {
+        for (AbstractWidget* child : layeredWidgets[i]) {
+            child->Draw();
+        }
     }
 
     // Flush the console output if this is the top-level widget
@@ -145,6 +160,17 @@ void AbstractWidget::Blur()
     hasFocus = false;
 
     Application::GetEventQueue()->SetCurrentFocusedWidget(nullptr);
+}
+
+void AbstractWidget::SetLayer(WidgetLayer newLayer)
+{
+    layer = newLayer;
+    Invalidate();
+}
+
+WidgetLayer AbstractWidget::GetLayer()
+{
+    return layer;
 }
 
 int AbstractWidget::GetChildLength()

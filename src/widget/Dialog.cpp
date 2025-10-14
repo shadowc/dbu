@@ -15,6 +15,7 @@ Dialog::Dialog()
     size.Width = 60;
     size.Height = 15;
     colorScheme = "dialog";
+    layer = WidgetLayer::DIALOGS;
 }
 
 void Dialog::SetVisible(bool newVisible)

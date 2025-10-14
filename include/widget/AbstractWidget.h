@@ -1,6 +1,7 @@
 #pragma once
 #include "console/ConsoleTools.h"
 #include "event/EventDef.h"
+#include "widget/WidgetLayers.h"
 #include <vector>
 #include <string>
 
@@ -43,6 +44,9 @@ public:
     void Focus();
     void Blur();
 
+    void SetLayer(WidgetLayer newLayer);
+    WidgetLayer GetLayer();
+
     virtual void OnEvent(Event& event);
 
 protected:
@@ -53,6 +57,7 @@ protected:
     vector<AbstractWidget*> children;
     AbstractWidget* parent;
     string colorScheme;
+    WidgetLayer layer = WidgetLayer::DEFAULT;
 
     void SetColorScheme(string newColorScheme);
 
