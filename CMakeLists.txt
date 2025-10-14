@@ -40,6 +40,7 @@ set(
     PROJECT_SRC
     "src/DBU.cpp"
     "src/Application.cpp"
+    "src/config/Config.cpp"
     "src/event/KeyboardTools.cpp"
     "src/event/EventQueue.cpp"
     "src/console/Console.cpp"  
