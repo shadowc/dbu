@@ -41,6 +41,7 @@ set(
     "src/DBU.cpp"
     "src/Application.cpp"
     "src/config/Config.cpp"
+    "src/config/ConfigTools.cpp"
     "src/event/KeyboardTools.cpp"
     "src/event/EventQueue.cpp"
     "src/console/Console.cpp"  

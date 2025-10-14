@@ -8,7 +8,7 @@
     #define CONFIG_ENDL "\r\n"
 #else
     #define PATH_SEPARATOR "/"
-    #define USER_DIR "~"
+    #define USER_DIR getenv("HOME")
     #define CONFIG_DIR ".dbu"
     #define CONFIG_ENDL "\n"
 #endif

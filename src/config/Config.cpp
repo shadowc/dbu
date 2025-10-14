@@ -1,5 +1,6 @@
 #include "config/Config.h"
 #include "config/ConfigDef.h"
+#include "config/ConfigTools.h"
 #include <vector>
 #include <iostream>
 #include <string>
@@ -17,7 +18,7 @@ Config::Config()
 void Config::Load()
 {
     // check if the config directory exists
-    string configPath = string(USER_DIR) + PATH_SEPARATOR + CONFIG_DIR;
+    string configPath = _getUserFolder() + PATH_SEPARATOR + CONFIG_DIR;
     if (!std::filesystem::exists(configPath)) {
         return;
     }
@@ -37,7 +38,7 @@ void Config::Load()
 void Config::Save()
 {
     // check if the config directory exists
-    string configPath = string(USER_DIR) + PATH_SEPARATOR + CONFIG_DIR;
+    string configPath = _getUserFolder() + PATH_SEPARATOR + CONFIG_DIR;
     if (!filesystem::exists(configPath)) {
         filesystem::create_directory(configPath);
     }

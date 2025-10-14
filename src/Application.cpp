@@ -3,6 +3,8 @@
 #include "console/Console.h"
 #include "widget/Screen.h"
 #include "menu-config/MenuConfig.h"
+#include "config/Config.h"
+#include <vector>
 #include <thread>
 #include <chrono>
 
@@ -12,6 +14,7 @@ EventQueue* Application::eventQueue = nullptr;
 ConsoleTty* Application::console = nullptr;
 Screen* Application::screen = nullptr;
 MenuConfig* Application::menuConfig = nullptr;
+Config* Application::config = nullptr;
 
 void Application::Initialize()
 {
@@ -29,6 +32,10 @@ void Application::Initialize()
 
     if (menuConfig == nullptr) {
         menuConfig = new MenuConfig();
+    }
+
+    if (config == nullptr) {
+        config = new Config();
     }
 
     console->clearScreen();
@@ -85,6 +92,12 @@ void Application::Shutdown()
         delete menuConfig;
         menuConfig = nullptr;
     }
+
+    if (config != nullptr) {
+        config->Save();
+        delete config;
+        config = nullptr;
+    }
 }
 
 EventQueue* Application::GetEventQueue()
@@ -105,4 +118,13 @@ Screen* Application::GetScreen()
 MenuConfig* Application::GetMenuConfig()
 {
     return menuConfig;
+}
+
+vector<ConfigServerEntry> Application::GetConfigServers()
+{
+    if (config == nullptr) {
+        return vector<ConfigServerEntry>();
+    }
+
+    return config->GetServers();
 }
