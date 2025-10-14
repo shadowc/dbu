@@ -8,7 +8,7 @@ using namespace Console;
 
 class EventQueue;
 class Screen;
-class MenuConfig;
+class MenuManager;
 
 class Application
 {
@@ -20,13 +20,13 @@ public:
     static EventQueue* GetEventQueue();
     static ConsoleTty* GetConsole();
     static Screen* GetScreen();
-    static MenuConfig* GetMenuConfig();
+    static MenuManager* GetMenuManager();
     static vector<ConfigServerEntry> GetConfigServers();
 
 private:
     static EventQueue* eventQueue;
     static ConsoleTty* console;
     static Screen* screen;
-    static MenuConfig* menuConfig;
+    static MenuManager* menuManager;
     static Config* config;
 };

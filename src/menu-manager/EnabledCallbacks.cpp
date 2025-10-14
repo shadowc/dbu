@@ -1,4 +1,4 @@
-#include "menu-config/EnabledCallbacks.h"
+#include "menu-manager/EnabledCallbacks.h"
 
 bool EnabledCallbacks::DisconnectEnabled()
 {

@@ -6,10 +6,10 @@
 using namespace Console;
 class Menu;
 
-class MenuConfig
+class MenuManager
 {
 public:
-    MenuConfig();
+    MenuManager();
     void RenderMenu();
 
     void ActivateMenu();

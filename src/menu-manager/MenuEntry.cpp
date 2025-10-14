@@ -1,4 +1,4 @@
-#include "menu-config/MenuEntry.h"
+#include "menu-manager/MenuEntry.h"
 #include <string>
 #include <functional>
 

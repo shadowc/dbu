@@ -56,10 +56,10 @@ set(
     "src/widget/Dialog.cpp"
     "src/widget/Menu.cpp"
     "src/widget/MenuItem.cpp"
-    "src/menu-config/EnabledCallbacks.cpp"
-    "src/menu-config/MenuConfig.cpp"
-    "src/menu-config/MenuEntry.cpp"
-    "src/menu-config/MenuActions.cpp"
+    "src/menu-manager/EnabledCallbacks.cpp"
+    "src/menu-manager/MenuManager.cpp"
+    "src/menu-manager/MenuEntry.cpp"
+    "src/menu-manager/MenuActions.cpp"
 )
 
 # Add source to this project's executable.

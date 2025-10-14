@@ -2,7 +2,7 @@
 #include "event/EventQueue.h"
 #include "console/Console.h"
 #include "widget/Screen.h"
-#include "menu-config/MenuConfig.h"
+#include "menu-manager/MenuManager.h"
 #include "config/Config.h"
 #include <vector>
 #include <thread>
@@ -13,7 +13,7 @@ using namespace Console;
 EventQueue* Application::eventQueue = nullptr;
 ConsoleTty* Application::console = nullptr;
 Screen* Application::screen = nullptr;
-MenuConfig* Application::menuConfig = nullptr;
+MenuManager* Application::menuManager = nullptr;
 Config* Application::config = nullptr;
 
 void Application::Initialize()
@@ -30,8 +30,8 @@ void Application::Initialize()
         screen = new Screen();
     }
 
-    if (menuConfig == nullptr) {
-        menuConfig = new MenuConfig();
+    if (menuManager == nullptr) {
+        menuManager = new MenuManager();
     }
 
     if (config == nullptr) {
@@ -41,7 +41,7 @@ void Application::Initialize()
     console->clearScreen();
     console->hideCursor();
 
-    menuConfig->RenderMenu();
+    menuManager->RenderMenu();
     screen->Invalidate();
     screen->Draw();
 }
@@ -88,9 +88,9 @@ void Application::Shutdown()
         eventQueue = nullptr;
     }
 
-    if (menuConfig != nullptr) {
-        delete menuConfig;
-        menuConfig = nullptr;
+    if (menuManager != nullptr) {
+        delete menuManager;
+        menuManager = nullptr;
     }
 
     if (config != nullptr) {
@@ -115,9 +115,9 @@ Screen* Application::GetScreen()
     return screen;
 }
 
-MenuConfig* Application::GetMenuConfig()
+MenuManager* Application::GetMenuManager()
 {
-    return menuConfig;
+    return menuManager;
 }
 
 vector<ConfigServerEntry> Application::GetConfigServers()

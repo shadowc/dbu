@@ -1,6 +1,6 @@
-#include "menu-config/MenuConfig.h"
-#include "menu-config/MenuActions.h"
-#include "menu-config/EnabledCallbacks.h"
+#include "menu-manager/MenuManager.h"
+#include "menu-manager/MenuActions.h"
+#include "menu-manager/EnabledCallbacks.h"
 #include "widget/WidgetLayers.h"
 #include "Application.h"
 #include "widget/Screen.h"
@@ -8,7 +8,7 @@
 #include "widget/MenuItem.h"
 #include "console/ConsoleTools.h"
 
-MenuConfig::MenuConfig()
+MenuManager::MenuManager()
 {
     // Initialize with empty menu
     entries = vector<MenuEntry>();
@@ -25,7 +25,7 @@ MenuConfig::MenuConfig()
     entries.push_back(MenuEntry("Exit", MenuActions::ExitAction));
 }
 
-void MenuConfig::RenderMenu()
+void MenuManager::RenderMenu()
 {
     Screen* screen = Application::GetScreen();
 
@@ -56,7 +56,7 @@ void MenuConfig::RenderMenu()
     }
 }
 
-void MenuConfig::ActivateMenu()
+void MenuManager::ActivateMenu()
 {
     Menu* mainMenu = activeMenus.at(0);
 
@@ -66,7 +66,7 @@ void MenuConfig::ActivateMenu()
     }
 }
 
-void MenuConfig::DeactivateMenu()
+void MenuManager::DeactivateMenu()
 {
     while (activeMenus.size() > 1) {
         DeactivateSubMenu();
@@ -80,7 +80,7 @@ void MenuConfig::DeactivateMenu()
     }
 }
 
-void MenuConfig::ActivateSubMenu()
+void MenuManager::ActivateSubMenu()
 {
     Screen* screen = Application::GetScreen();
     Menu* parentMenu = activeMenus.back();
@@ -128,7 +128,7 @@ void MenuConfig::ActivateSubMenu()
     }
 }
 
-void MenuConfig::DeactivateSubMenu()
+void MenuManager::DeactivateSubMenu()
 {
     Menu* lastSubMenu = activeMenus.back();
 
@@ -146,7 +146,7 @@ void MenuConfig::DeactivateSubMenu()
     }
 }
 
-vector<MenuEntry> MenuConfig::FindNextSubEntries()
+vector<MenuEntry> MenuManager::FindNextSubEntries()
 {
     vector<MenuEntry> subEntries = entries;
     
@@ -164,7 +164,7 @@ vector<MenuEntry> MenuConfig::FindNextSubEntries()
     return subEntries;
 }
 
-void MenuConfig::CycleMenuRight()
+void MenuManager::CycleMenuRight()
 {
     DeactivateSubMenu();
     Menu* mainMenu = activeMenus.at(0);
@@ -182,7 +182,7 @@ void MenuConfig::CycleMenuRight()
     }
 }
 
-void MenuConfig::CycleMenuLeft()
+void MenuManager::CycleMenuLeft()
 {
     DeactivateSubMenu();
     Menu* mainMenu = activeMenus.at(0);
@@ -200,7 +200,7 @@ void MenuConfig::CycleMenuLeft()
     }
 }
 
-Coords MenuConfig::GetPositionForSubMenu(Menu* parentMenu, int selectedIndex)
+Coords MenuManager::GetPositionForSubMenu(Menu* parentMenu, int selectedIndex)
 {
     // Get parent menu position and size
     Coords parentPos = parentMenu->GetPosition();

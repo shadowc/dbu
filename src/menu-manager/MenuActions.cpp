@@ -1,6 +1,6 @@
-#include "menu-config/MenuActions.h"
+#include "menu-manager/MenuActions.h"
 #include "Application.h"
-#include "menu-config/MenuConfig.h"
+#include "menu-manager/MenuManager.h"
 #include "widget/Screen.h"
 #include "event/EventQueue.h"
 
@@ -12,21 +12,21 @@ void MenuActions::ExitAction()
 
 void MenuActions::RenderConnectionsSubMenu()
 {
-    Application::GetMenuConfig()->ActivateSubMenu();
+    Application::GetMenuManager()->ActivateSubMenu();
 }
 
 // Connections SubMenu Actions
 void MenuActions::ConnectToServerAction()
 {
-    Application::GetMenuConfig()->DeactivateMenu();
+    Application::GetMenuManager()->DeactivateMenu();
 }
 
 void MenuActions::DisconnectAction()
 {
-    Application::GetMenuConfig()->DeactivateMenu();
+    Application::GetMenuManager()->DeactivateMenu();
 }
 
 void MenuActions::ManageConnectionsAction()
 {
-    Application::GetMenuConfig()->DeactivateMenu();
+    Application::GetMenuManager()->DeactivateMenu();
 }

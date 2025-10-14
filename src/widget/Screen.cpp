@@ -5,7 +5,7 @@
 #include "console/ConsoleTools.h"
 #include "event/EventQueue.h"
 #include "event/KeyCodes.h"
-#include "menu-config/MenuConfig.h"
+#include "menu-manager/MenuManager.h"
 #include <iostream>
 #include <string>
 #include <thread>
@@ -92,7 +92,7 @@ void Screen::OnEvent(Event& event)
                     break;
 
                 case (KEY_F9):
-                    Application::GetMenuConfig()->ActivateMenu();
+                    Application::GetMenuManager()->ActivateMenu();
                     break;
             }
 
