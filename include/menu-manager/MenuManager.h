@@ -1,6 +1,6 @@
 #pragma once
 #include "MenuEntry.h"
-#include "console/ConsoleTools.h"
+#include "console/ConsoleDef.h"
 #include <vector>
 
 using namespace Console;

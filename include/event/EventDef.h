@@ -1,5 +1,5 @@
 #pragma once
-#include "console/ConsoleTools.h"
+#include "console/ConsoleDef.h"
 
 using namespace Console;
 

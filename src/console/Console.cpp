@@ -104,7 +104,7 @@ namespace Console {
         int width = to - from;
     
         int strFrom = from + (int)(floor((float)width / 2.0f) - floor((float)str.length() / 2));
-        int strTo = strFrom + (int)str.length() - 1;
+        int strTo = strFrom + (int)str.length();
 
         for (int i = strFrom, n = 0; i < strTo; i++, n++) {
             if (!isMasked(i, y)) {

@@ -1,5 +1,5 @@
 #pragma once
-#include "console/ConsoleTools.h"
+#include "console/ConsoleDef.h"
 #include "event/EventDef.h"
 #include "widget/WidgetLayers.h"
 #include <vector>
@@ -27,7 +27,7 @@ public:
     AbstractWidget* GetParent();
     virtual void SetParent(AbstractWidget*);
     void RemoveParent();
-    void AddChild(AbstractWidget* child);
+    virtual void AddChild(AbstractWidget* child);
     void RemoveChild(AbstractWidget* child);
     void RemoveChildAt(int index);
     int GetChildLength();

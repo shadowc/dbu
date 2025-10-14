@@ -2,7 +2,7 @@
 #include "widget/Screen.h"
 #include "Application.h"
 #include "console/Console.h"
-#include "console/ConsoleTools.h"
+#include "console/ConsoleDef.h"
 #include "event/EventQueue.h"
 #include "event/KeyCodes.h"
 #include "menu-manager/MenuManager.h"

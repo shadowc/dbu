@@ -6,7 +6,7 @@
 #include "widget/Screen.h"
 #include "widget/Menu.h"
 #include "widget/MenuItem.h"
-#include "console/ConsoleTools.h"
+#include "console/ConsoleDef.h"
 
 MenuManager::MenuManager()
 {

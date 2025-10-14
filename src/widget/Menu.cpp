@@ -114,8 +114,6 @@ void Menu::OnEvent(Event& event)
 
 void Menu::Invalidate()
 {
-    AbstractWidget::Invalidate();
-
     if (parent != nullptr) {
         if (horizontal) {
             // position menu at the top of the parent with the specified padding
@@ -143,6 +141,8 @@ void Menu::Invalidate()
             size.Width = width + (hasBorder ? 2 : 0); // add border width
         }
     }
+
+    AbstractWidget::Invalidate();
 }
 
 void Menu::RenderWidget()

@@ -1,7 +1,7 @@
 #include "widget/AbstractWidget.h"
 #include "Application.h"
 #include "console/Console.h"
-#include "console/ConsoleTools.h"
+#include "console/ConsoleDef.h"
 #include "event/EventQueue.h"
 #include <vector>
 #include <iostream>

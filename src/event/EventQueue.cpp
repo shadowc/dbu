@@ -1,7 +1,7 @@
 #include "event/EventQueue.h"
 #include "Application.h"
 #include "console/Console.h"
-#include "console/ConsoleTools.h"
+#include "console/ConsoleDef.h"
 #include "event/KeyboardTools.h"
 #include "widget/AbstractWidget.h"
 #include "widget/Screen.h"

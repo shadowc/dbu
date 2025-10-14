@@ -1,52 +1,8 @@
 #pragma once
 #include <platform.h>
+#include "console/ConsoleDef.h"
 
 namespace Console {
-    struct Coords {
-        Coords() {
-            X = 0;
-            Y = 0;
-        }
-
-        Coords(int x, int y) {
-            X = x;
-            Y = y;
-        }
-
-        int X;
-        int Y;
-    };
-
-    struct Size {
-        Size() {
-            Width = 0;
-            Height = 0;
-        }
-
-        Size(int w, int h) {
-            Width = w;
-            Height = h;
-        }
-
-        int Width;
-        int Height;
-    };
-
-    struct Mask {
-        Mask() {
-            Position = Coords(0, 0);
-            Dimentions = Size(0, 0);
-        }
-
-        Mask(int x, int y, int w, int h) {
-            Position = Coords(x, y);
-            Dimentions = Size(w, h);
-        }
-
-        Coords Position;
-        Size Dimentions;
-    };
-
     #ifdef __WIN32
         #define _getConsoleSize __getConsoleSize_W
         #define _initConsoleInputMode __initConsoleInputMode_W

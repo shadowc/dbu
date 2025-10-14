@@ -2,7 +2,7 @@
 #include "Color.h"
 #include "ColorSchemeManager.h"
 #include "ColorStyle.h"
-#include "ConsoleTools.h"
+#include "ConsoleDef.h"
 #include <vector>
 
 namespace Console {

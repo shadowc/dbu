@@ -1,7 +1,7 @@
 #include "widget/Dialog.h"
 #include "Application.h"
 #include "widget/AbstractWidget.h"
-#include "console/ConsoleTools.h"
+#include "console/ConsoleDef.h"
 #include "console/Console.h"
 #include "event/EventDef.h"
 #include "event/KeyCodes.h"
@@ -84,8 +84,6 @@ void Dialog::OnEvent(Event& event)
 
 void Dialog::Invalidate()
 {
-    AbstractWidget::Invalidate();
-
     if (parent != nullptr) {
        // center dialog on parent screenspace
         Coords parentCoords = parent->GetPosition();
@@ -94,4 +92,6 @@ void Dialog::Invalidate()
         coords.X = max(0, parentCoords.X + (int) floor(float(parentSize.Width / 2.0f)) - (int) floor(float(size.Width / 2.0f)));
         coords.Y = max(0, parentCoords.Y + (int) floor(float(parentSize.Height / 2.0f)) - (int) floor(float(size.Height / 2.0f)));
     }
+
+    AbstractWidget::Invalidate();
 }
