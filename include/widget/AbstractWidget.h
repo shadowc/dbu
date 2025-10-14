@@ -13,7 +13,7 @@ public:
     AbstractWidget();
     ~AbstractWidget();
 
-    void Draw();
+    virtual void Draw();
 
     Coords GetPosition();
     void SetPosition(Coords newCoords);

@@ -98,3 +98,8 @@ void Stack::SetParent(AbstractWidget *parent)
 
     AbstractWidget::SetParent(parent);
 }
+
+bool Stack::HasActiveMask()
+{
+    return false;
+}

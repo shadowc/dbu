@@ -11,6 +11,7 @@ public:
     void AddChild(AbstractWidget* child) override;
     void Invalidate() override;
     void SetParent(AbstractWidget* parent) override;
+    bool HasActiveMask() override;
 
 protected:
     StackDirections direction = StackDirections::HORIZONTAL;

@@ -32,6 +32,15 @@ void Dialog::SetVisible(bool newVisible)
     }
 }
 
+void Dialog::Draw()
+{
+    if (!visible) {
+        return;
+    }
+
+    AbstractWidget::Draw();
+}
+
 void Dialog::SetTitle(string newTitle)
 {
     title = newTitle;

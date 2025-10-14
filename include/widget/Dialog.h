@@ -9,6 +9,7 @@ public:
     Dialog();
 
     void SetVisible(bool newVisible);
+    void Draw() override;
     void SetTitle(string newTitle);
     bool HasActiveMask() override;
     void Invalidate() override;
