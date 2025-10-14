@@ -1,7 +1,7 @@
 #pragma ocne
 #include "widget/AbstractWidget.h"
 
-class StackItem : AbstractWidget
+class StackItem : public AbstractWidget
 {
 public:
     void SetStackSize(int newSize);

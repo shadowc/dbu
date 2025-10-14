@@ -3,6 +3,8 @@
 #include "dialog-manager/DialogDef.h"
 #include "widget/Dialog.h"
 #include "widget/Screen.h"
+#include "widget/HStack.h"
+#include "widget/StackItem.h"
 #include <vector>
 
 using namespace std;
@@ -13,6 +15,17 @@ DialogManager::DialogManager()
 
     Dialog* connectionDialog = new Dialog();
     connectionDialog->SetTitle(" Connect to server ");
+
+    HStack* hStack = new HStack();
+
+    StackItem* sidebar = new StackItem();
+    sidebar->SetStackSize(20);
+    hStack->AddChild(sidebar);
+
+    StackItem* contents = new StackItem();
+    hStack->AddChild(contents);
+
+    connectionDialog->AddChild(hStack);
 
     dialogs.push_back(connectionDialog);
 }

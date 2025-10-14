@@ -1,7 +1,7 @@
 #pragma once
 #include "widget/Stack.h"
 
-class VStack : Stack
+class VStack : public Stack
 {
 public:
     VStack();

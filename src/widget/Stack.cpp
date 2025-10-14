@@ -34,8 +34,10 @@ void Stack::Invalidate()
     Size parentSize = parent->GetSize();
     Coords parentCoords = parent->GetPosition();
 
-    SetPosition(parentCoords.X + padding.Left, parentCoords.Y + padding.Top);
-    SetSize(parentSize.Width - padding.Left - padding.Right, parentSize.Height - padding.Top - padding.Bottom);
+    coords.X = parentCoords.X + padding.Left;
+    coords.Y = parentCoords.Y + padding.Top;
+    size.Width = parentSize.Width - padding.Left - padding.Right;
+    size.Height = parentSize.Height - padding.Top - padding.Bottom;
 
     int remainingSize = direction == StackDirections::HORIZONTAL ? size.Width : size.Height;
     int remainingSizeDivisibleBy = 0;

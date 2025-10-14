@@ -1,7 +1,7 @@
 #pragma once
 #include "widget/Stack.h"
 
-class HStack : Stack
+class HStack : public Stack
 {
 public:
     HStack();
