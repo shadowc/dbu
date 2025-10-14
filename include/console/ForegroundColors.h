@@ -7,7 +7,7 @@ namespace Console {
         static Color BLACK;
         static Color RED;
         static Color GREEN;
-        static Color YELLOW;
+        static Color BROWN;
         static Color BLUE;
         static Color MAGENTA;
         static Color CYAN;
@@ -15,7 +15,7 @@ namespace Console {
         static Color GREY;
         static Color BRIGHT_RED;
         static Color BRIGHT_GREEN;
-        static Color BRIGHT_YELLOW;
+        static Color YELLOW;
         static Color BRIGHT_BLUE;
         static Color BRIGHT_MAGENTA;
         static Color BRIGHT_CYAN;

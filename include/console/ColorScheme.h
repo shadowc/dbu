@@ -31,8 +31,8 @@ namespace Console {
             ColorStyle btnS,
             ColorStyle btnD,
             ColorStyle m,
-            ColorStyle mD,
             ColorStyle mS,
+            ColorStyle mD,
             ColorStyle mSD
         ) {
             Paragraph = p;

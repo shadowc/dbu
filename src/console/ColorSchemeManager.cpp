@@ -22,7 +22,7 @@ namespace Console {
             ColorStyle(ForegroundColors::BRIGHT_WHITE, BackgroundColors::RED), // Button Danger
             ColorStyle(ForegroundColors::WHITE, BackgroundColors::GREY), // Menu
             ColorStyle(ForegroundColors::WHITE, BackgroundColors::CYAN), // Menu Selected
-            ColorStyle(ForegroundColors::BLACK, BackgroundColors::GREY), // Menu Disabled
+            ColorStyle(ForegroundColors::YELLOW, BackgroundColors::GREY), // Menu Disabled
             ColorStyle(ForegroundColors::GREY, BackgroundColors::CYAN) // Menu Selected
         );
         
